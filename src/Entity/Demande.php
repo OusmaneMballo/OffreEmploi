@@ -32,6 +32,18 @@ class Demande
      */
     private $cv;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Demandeur::class, inversedBy="demandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $demandeur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Offre::class, inversedBy="demandes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +81,30 @@ class Demande
     public function setCv(string $cv): self
     {
         $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getDemandeur(): ?Demandeur
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(?Demandeur $demandeur): self
+    {
+        $this->demandeur = $demandeur;
+
+        return $this;
+    }
+
+    public function getOffre(): ?Offre
+    {
+        return $this->offre;
+    }
+
+    public function setOffre(?Offre $offre): self
+    {
+        $this->offre = $offre;
 
         return $this;
     }

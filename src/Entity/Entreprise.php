@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,22 @@ class Entreprise
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $telephone;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="entreprise")
+     */
+    private $offres;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=SecteurActivite::class, inversedBy="entreprises")
+     */
+    private $secteurs;
+
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+        $this->secteurs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,4 +141,59 @@ class Entreprise
 
         return $this;
     }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setEntreprise($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getEntreprise() === $this) {
+                $offre->setEntreprise(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SecteurActivite[]
+     */
+    public function getSecteurs(): Collection
+    {
+        return $this->secteurs;
+    }
+
+    public function addSecteur(SecteurActivite $secteur): self
+    {
+        if (!$this->secteurs->contains($secteur)) {
+            $this->secteurs[] = $secteur;
+        }
+
+        return $this;
+    }
+
+    public function removeSecteur(SecteurActivite $secteur): self
+    {
+        $this->secteurs->removeElement($secteur);
+
+        return $this;
+    }
+
 }

@@ -42,6 +42,12 @@ class Formation
      */
     private $description;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Demandeur::class, inversedBy="formation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $demandeur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +109,18 @@ class Formation
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDemandeur(): ?Demandeur
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(?Demandeur $demandeur): self
+    {
+        $this->demandeur = $demandeur;
 
         return $this;
     }

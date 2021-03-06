@@ -42,6 +42,12 @@ class Experience
      */
     private $organisation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Demandeur::class, inversedBy="experiences")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $demandeur;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +109,18 @@ class Experience
     public function setOrganisation(string $organisation): self
     {
         $this->organisation = $organisation;
+
+        return $this;
+    }
+
+    public function getDemandeur(): ?Demandeur
+    {
+        return $this->demandeur;
+    }
+
+    public function setDemandeur(?Demandeur $demandeur): self
+    {
+        $this->demandeur = $demandeur;
 
         return $this;
     }
