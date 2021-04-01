@@ -4,8 +4,6 @@
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/welcom/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/welcom/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +179,8 @@
       <workItem from="1616546926961" duration="363000" />
       <workItem from="1616605190636" duration="1518000" />
       <workItem from="1617232525511" duration="4370000" />
-      <workItem from="1617238290209" duration="4610000" />
+      <workItem from="1617238290209" duration="5273000" />
+      <workItem from="1617315670379" duration="1155000" />
     </task>
     <servers />
   </component>
@@ -200,10 +199,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="533" y="235" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1617239334272" />
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1617238319129">
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1617315687511">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1617238319129" />
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1617315687511" />
     <state x="425" y="197" key="run.anything.popup" timestamp="1617236742343">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
