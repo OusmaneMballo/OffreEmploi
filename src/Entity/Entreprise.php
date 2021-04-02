@@ -59,6 +59,12 @@ class Entreprise
      */
     private $secteurs;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="entreprise", cascade={"persist", "remove"})
+     */
+    private $user;
+
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -192,6 +198,18 @@ class Entreprise
     public function removeSecteur(SecteurActivite $secteur): self
     {
         $this->secteurs->removeElement($secteur);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

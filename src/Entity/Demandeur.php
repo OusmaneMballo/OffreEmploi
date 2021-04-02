@@ -84,6 +84,11 @@ class Demandeur
      */
     private $favoris;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="demandeur", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->formation = new ArrayCollection();
@@ -322,6 +327,18 @@ class Demandeur
                 $favori->setDemandeur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
