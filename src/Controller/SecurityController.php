@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
 
         $roles=$this->roleRepository->findAll();
-        $data=['last_username' => $lastUsername, 'error' => $error, 'roles'=>$roles, "is_signin"=>$this::$is_signin, "error"=>$this->error];
+        $data=['last_username' => $lastUsername, 'error' => $error, 'roles'=>$roles, "is_signin"=>$this::$is_signin];
         return $this->render('security/login.html.twig', $data);
     }
 
