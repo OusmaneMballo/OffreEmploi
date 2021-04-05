@@ -18,34 +18,53 @@
     </div>
 </section>
 <section class="site-section">
+    {% if ((is_signin is defined) and is_signin == true) %}
+        <div class="alert alert-success" role="alert">
+            Inscription réussie avec succé! merci de ce connecter maintenant avec vos crédenciales...
+        </div>
+        {% elseif((error is defined) and error == true) %}
+            <div class="alert alert-danger" role="alert">
+                Oups!... Erreur d'inscription veuillez verifier votre saisie...
+            </div>
+    {% endif %}
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mb-5">
                 <h2 class="mb-4">S'Inscrir</h2>
-                <form action="#" class="p-4 border rounded">
-
+                <form method="post" action="{{ path('app_signin') }}" class="p-4 border rounded">
                     <div class="row form-group">
                         <div class="col-md-12 mb-3 mb-md-0">
                             <label class="text-black" for="fname">Email</label>
-                            <input type="text" id="fname" class="form-control" placeholder="Email address">
+                            <input type="text" id="fname" name="email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-12 mb-3 mb-md-0">
                             <label class="text-black" for="fname">Password</label>
-                            <input type="password" id="fname" class="form-control" placeholder="Password">
+                            <input type="password" id="fname" name="passwd" class="form-control" placeholder="Mot de passe">
                         </div>
                     </div>
                     <div class="row form-group mb-4">
                         <div class="col-md-12 mb-3 mb-md-0">
                             <label class="text-black" for="fname">Re-Type Password</label>
-                            <input type="password" id="fname" class="form-control" placeholder="Re-type Password">
+                            <input type="password" id="fname" name="retrypasswd" class="form-control" placeholder="Re-type Password">
                         </div>
                     </div>
-
+                    <label class="text-black" for="fname">S'inscrir en tant que:</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="role" value="ROLE_DEMANDEUR" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">Demandeur d'emploi</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="role" value="ROLE_ENTREPRISE" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Entreprise</label>
+                    </div>
+                    <input type="hidden" name="signin_token"
+                           value="{{ csrf_token('inscription') }}"
+                    >
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white">
+                            <input type="submit" value="Valider !" class="btn px-4 btn-primary text-white">
                         </div>
                     </div>
                 </form>
@@ -53,10 +72,10 @@
             <div class="col-lg-6">
                 <h2 class="mb-4">Se Connecter</h2>
                 <form method="post" class="p-4 border rounded">
-                    {% if error %}
+                    {% if((error is defined) and error==true) %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
-                    {% if app.user %}
+                    {% if((app.user is defined) and app.user) %}
                         <div class="mb-3">
                             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                         </div>
@@ -64,7 +83,7 @@
                     <div class="row form-group">
                         <div class="col-md-12 mb-3 mb-md-0">
                             <label class="text-black" for="fname">Email</label>
-                            <input type="email" id="fname" value="{{ last_username }}" name="email" placeholder="Email address" class="form-control" required autofocus>
+                            <input type="email" id="fname" name="email" placeholder="Email address" class="form-control" required autofocus>
                         </div>
                     </div>
                     <div class="row form-group mb-4">
@@ -78,10 +97,9 @@
                     >
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <input type="submit" value="Log In" class="btn px-4 btn-primary text-white">
+                            <input type="submit" value="Connexion" class="btn px-4 btn-primary text-white">
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
