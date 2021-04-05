@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,10 +25,13 @@ class User implements UserInterface
      */
     private $email;
 
-    /**
+    /*
+     *  /**
      * @ORM\Column(type="json")
-     */
+     *
     private $roles = [];
+     * */
+
 
     /**
      * @var string The hashed password
@@ -43,6 +48,16 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity=Demandeur::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $demandeur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
+     */
+    private $roles;
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,19 +91,24 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = $roles =Array();// $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        foreach ($this->roles as $r)
+        {
+            $roles[]=$r->getLibelle();
+        }
 
         return array_unique($roles);
     }
+    /*
+     *  public function setRoles(array $roles): self
+        {
+            $this->roles = $roles;
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
+            return $this;
+        }
+     * */
 
     /**
      * @see UserInterface
@@ -165,6 +185,22 @@ class User implements UserInterface
         }
 
         $this->demandeur = $demandeur;
+
+        return $this;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        $this->roles->removeElement($role);
 
         return $this;
     }
