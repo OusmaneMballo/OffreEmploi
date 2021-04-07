@@ -56,9 +56,15 @@
                                 <li><a href="index.html" class="nav-link active">Demandes Reçus</a></li>
                                 <li><a href="index.html" class="nav-link active">Profile</a></li>
                                 {% elseif is_granted('ROLE_DEMANDEUR') %}
-                                    <li><a href="index.html" class="nav-link active">Profile</a></li>
-                                    <li><a href="index.html" class="nav-link active">Demandes</a></li>
-                                    <li><a href="index.html" class="nav-link active">Offres</a></li>
+                                    {% if app.user.demandeur==null %}
+                                        <li><a href="{{ path('app_demandeur') }}" class="nav-link active" style="color: #ffd552">Completer mon Profile</a></li>
+                                        <li disabled>Demandes</li>
+                                        <li disabled>Offres</li>
+                                        {% else %}
+                                            <li><a href="index.html" class="nav-link active">Profile</a></li>
+                                            <li><a href="index.html" class="nav-link active">Demandes</a></li>
+                                            <li><a href="index.html" class="nav-link active">Offres</a></li>
+                                    {% endif %}
                                 {% else %}
                                     <li><a href="about.html">A Propos</a></li>
                                     <li><a href="contact.html">Contact</a></li>

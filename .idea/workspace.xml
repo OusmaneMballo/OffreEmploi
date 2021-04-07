@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +182,8 @@
       <workItem from="1617238290209" duration="5273000" />
       <workItem from="1617315670379" duration="7452000" />
       <workItem from="1617575180528" duration="7639000" />
-      <workItem from="1617624985038" duration="20245000" />
+      <workItem from="1617624985038" duration="21416000" />
+      <workItem from="1617751703164" duration="5484000" />
     </task>
     <servers />
   </component>
@@ -206,10 +206,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="187" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.864@0.0.1536.864" timestamp="1617641290247" />
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1617624989568">
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1617751723369">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1617624989568" />
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1617751723369" />
     <state x="425" y="197" key="run.anything.popup" timestamp="1617590706172">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Demandeur{% endblock %}
+{% block body %}
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('{{ ('templates/images/hero_1.jpg') }}');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Profile</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Profile</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section" id="next-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <form action="#" class="">
+                    <div class="row form-group">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <label class="text-black" for="fname">Prenom & Nom</label>
+                            <input type="text" id="fname" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-black" for="lname">Genre</label>
+                            <select name="sexe" id="inputState" class="form-control">
+                                <option value="masculin" selected>Masculin</option>
+                                <option value="feminin">Feminin</option>
+                            </select>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">Votre Age</label>
+                                <input type="text" id="fname" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="text-black" for="lname">Annee d'Experience</label>
+                                <select name="sexe" id="inputState" class="form-control">
+                                    <option value="0" selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="plus">+10</option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="email">Email</label>
+                            <input type="email" id="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="subject">Subject</label>
+                            <input type="subject" id="subject" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-5 ml-auto">
+                <div class="sidebar-box">
+                    <img src="{{ ('templates/images/pp.png') }}" alt="Image placeholder" class="img-fluid mb-4 w-50 rounded-circle">
+                </div>
+                <div class="p-4 mb-3 bg-white">
+                    <p class="mb-0 font-weight-bold">Email Address</p>
+                    <p class="mb-0"><a href="#">{{ app.user.email }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
