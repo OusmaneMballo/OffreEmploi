@@ -31,9 +31,7 @@ class DemandeurController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('demandeur/index.html.twig', [
-            'controller_name' => 'DemandeurController',
-        ]);
+        return $this->render('demandeur/index.html.twig');
     }
 
     /**
@@ -44,10 +42,18 @@ class DemandeurController extends AbstractController
             if ($this->isCsrfTokenValid('demandeur', $request->request->get('demandeur_token'))){
                 $demandeur=new Demandeur();
                 if($request->request->get('nomPrenom')!='' && $request->request->get('email')!='' && $request->request->get('sexe')!=''){
+                    $demandeur->setNomPrenom($request->request->get('nomPrenom'));
                     $demandeur->setEmail($request->request->get('email'));
                     $demandeur->setAdresse($request->request->get('adresse'));
                     $demandeur->setPhoto($request->request->get('photoProfile'));
                     $demandeur->setSexe($request->request->get('sexe'));
+                    $demandeur->setLieuNaissance($request->request->get('lieuNaiss'));
+                    $demandeur->setDateNaissance($request->request->get('dateNaiss'));
+                    $demandeur->setPhoto($request->request->get('photoProfile'));
+                    $demandeur->setUser($this->getUser());
+                    $this->em->persist($demandeur);
+                    $this->em->flush();
+                    return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
                 }
 
             }
