@@ -89,6 +89,16 @@ class Demandeur
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $dateNaissance;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $lieuNaissance;
+
     public function __construct()
     {
         $this->formation = new ArrayCollection();
@@ -339,6 +349,30 @@ class Demandeur
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?string
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(string $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    public function getLieuNaissance(): ?string
+    {
+        return $this->lieuNaissance;
+    }
+
+    public function setLieuNaissance(string $lieuNaissance): self
+    {
+        $this->lieuNaissance = $lieuNaissance;
 
         return $this;
     }
