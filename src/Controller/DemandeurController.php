@@ -17,4 +17,11 @@ class DemandeurController extends AbstractController
             'controller_name' => 'DemandeurController',
         ]);
     }
+
+    /**
+     * @Route("/adddemandeur", name="app_demandeur_add")
+     */
+    public function addDemandeur(){
+
+    }
 }

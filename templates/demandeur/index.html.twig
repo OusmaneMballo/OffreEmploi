@@ -14,76 +14,86 @@
         </div>
     </div>
 </section>
+    <section class="site-section">
+        <div class="container">
 
-<section class="site-section" id="next-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-5 mb-lg-0">
-                <form action="#" class="">
-                    <div class="row form-group">
-                        <div class="col-md-6 mb-3 mb-md-0">
-                            <label class="text-black" for="fname">Prenom & Nom</label>
-                            <input type="text" id="fname" class="form-control">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2>Mon Profil</h2>
                         </div>
-                        <div class="col-md-6">
-                            <label class="text-black" for="lname">Genre</label>
-                            <select name="sexe" id="inputState" class="form-control">
-                                <option value="masculin" selected>Masculin</option>
-                                <option value="feminin">Feminin</option>
-                            </select>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label class="text-black" for="fname">Votre Age</label>
-                                <input type="text" id="fname" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <form method="post" action="{{ path('app_demandeur_add') }}">
+                <div class="p-4 p-md-5 border rounded">
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
+                            <img src="{{ ('templates/images/person_1.jpg') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                            <div class="form-group">
+                                <br>
+                                <label class="btn btn-primary btn-md btn-file">
+                                    Changer photo<input type="file" name="photoProfile" hidden>
+                                </label>
                             </div>
-                            <div class="col-md-6">
-                                <label class="text-black" for="lname">Annee d'Experience</label>
-                                <select name="sexe" id="inputState" class="form-control">
-                                    <option value="0" selected>0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="plus">+10</option>
+                            <div class="form-group">
+                                <label for="job-title">Prenom & Nom</label>
+                                <input type="text" class="form-control" name="nomPrenom" id="job-title" placeholder="Votre Prenom et Nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email de Contact</label>
+                                <input type="text" class="form-control" id="email" placeholder="you@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-location">Date de Naissance</label>
+                                <input type="text" name="dateNaiss" class="form-control" id="job-location" placeholder="e.g. New York">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-region">Lieu de Naissance</label>
+                                <select class="selectpicker border rounded" name="lieuNaiss" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                    <option value="dakar">Dakar</option>
+                                    <option value="thies">Thies</option>
+                                    <option value="kaolack">Kaolack</option>
+                                    <option value="fatick">Fatick</option>
+                                    <option value="kafrine">Kafrine</option>
+                                    <option value="tambacounda">Tambacounda</option>
+                                    <option value="matam">Matam</option>
+                                    <option value="kedougou">Kedougou</option>
+                                    <option value="kolda">Kolda</option>
+                                    <option value="sediou">Sediou</option>
+                                    <option value="ziguinchor">Ziguinchor</option>
+                                    <option value="saintLouis">Saint-Louis</option>
+                                    <option value="diourbel">Diourbel</option>
+                                    <option value="louga">Louga</option>
                                 </select>
                             </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <label class="text-black" for="email">Email</label>
-                            <input type="email" id="email" class="form-control">
+
+                            <div class="form-group">
+                                <label for="job-type">Genre</label>
+                                <select class="selectpicker border rounded" name="sexe" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Genre">
+                                    <option>Masculin</option>
+                                    <option>Feminin</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <label class="text-black" for="subject">Subject</label>
-                            <input type="subject" id="subject" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-5 ml-auto">
-                <div class="sidebar-box">
-                    <img src="{{ ('templates/images/pp.png') }}" alt="Image placeholder" class="img-fluid mb-4 w-50 rounded-circle">
                 </div>
-                <div class="p-4 mb-3 bg-white">
-                    <p class="mb-0 font-weight-bold">Email Address</p>
-                    <p class="mb-0"><a href="#">{{ app.user.email }}</a></p>
+                <br/>
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-4 ml-auto">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="reset" class="btn btn-block btn-light btn-md">Annuler</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-block btn-primary btn-md">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
