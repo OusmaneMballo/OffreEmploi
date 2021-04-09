@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Demandeur;
 use App\Entity\Role;
 use App\Entity\User;
+use App\service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class DemandeurController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function addDemandeur(Request $request, UploadedFile $uploadedFile){
+    public function addDemandeur(Request $request, FileUploader $uploaderFile){
         if($request->isMethod("POST")){
             if ($this->isCsrfTokenValid('demandeur', $request->request->get('demandeur_token'))){
                 $demandeur=new Demandeur();
@@ -61,35 +62,27 @@ class DemandeurController extends AbstractController
                     $demandeur->setSexe($request->request->get('sexe'));
                     $demandeur->setLieuNaissance($request->request->get('lieuNaiss'));
                     $demandeur->setDateNaissance($request->request->get('dateNaiss'));
-                    $demandeur->setPhoto($request->request->get('photoProfile'));
                     $demandeur->setUser($this->getUser());
-                    dd($request->request->get('photoProfile'));
-                    if(!empty($request->files->get(photoProfile))){
+                    if(!empty($request->files->get('photoProfile'))){
                         $photoFile = $request->files->get('photoProfile');
-                        $photoFile = $request->files->get('photoProfile');
+
+                        //Recuperation du nom du fichier
                         $photoname = $photoFile->getClientOriginalName ();
-                        $originalFileName=pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
-                        // Move the file to the directory where photo are stored
-                        try {
-                                $uploadedFile->
-                            $photoFile->move(
-                                $this->getParameter('C:\MyProject\Emploi\emploi\public\photoprofile'),
 
-                            );
-                        } catch (FileException $e) {
-                            // ... handle exception if something happens during file upload
-                            dd("Oups!... erreur de chargement de la photo de profile");
+                        //On appelle le service de chargement du fichier dans le repertoir specifié
+                        $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\photoprofile',$photoFile,$photoname);
+
+                        //On teste si le fichier est bien chargé
+                        if(!$ok){
+                            return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
                         }
-
-                        // updates the 'photoFilename' property to store the PDF file name
-                        // instead of its contents
-                        $demandeur->setPhoto($newFilename);
-                        dd("photo");
+                        else{
+                            $demandeur->setPhoto($photoname);
+                        }
                     }
-                    dd("okey");
                     $this->em->persist($demandeur);
                     $this->em->flush();
-                    return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
+                    return $this->render('demandeur/profile.html.twig', ["demandeur"=>$demandeur]);
                 }
 
             }

@@ -5,12 +5,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <img src="{{ ('templates/images/person_1.jpg') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
-                    <p class="text-white font-weight-bold">{{ app.user.demandeur.getNomPrenom() }}</p>
-                    <div class="custom-breadcrumbs">
-                        <a href="#">{{ app.user.demandeur.getAdresse() }}</a><span class="mx-2 slash">/</span>
-                        <span class="text-white"><strong>{{ app.user.demandeur.getDateNaissance() }}</strong></span>
-                    </div>
+                    {% if app.user.demandeur==null%}
+                        {% if demandeur is defined and demandeur.getPhoto()!=null %}
+                            <img src="{{ ('photoprofile/') }}{{ demandeur.getPhoto() }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                          {% else %}
+                            <img src="{{ ('templates/images/person_1.jpg') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                        {% endif %}
+                        <p class="text-white font-weight-bold">{{ demandeur.getNomPrenom() }}</p>
+                        <div class="custom-breadcrumbs">
+                            <a href="#">{{ demandeur.getAdresse() }}</a><span class="mx-2 slash">/</span>
+                            <span class="text-white"><strong>{{ demandeur.getDateNaissance() }}</strong></span>
+                        </div>
+                        {% else %}
+                            <img src="{{ ('photoprofile/') }}{{ app.user.demandeur.getPhoto() }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                            <p class="text-white font-weight-bold">{{ app.user.demandeur.getNomPrenom() }}</p>
+                            <div class="custom-breadcrumbs">
+                                <a href="#">{{ app.user.demandeur.getAdresse() }}</a><span class="mx-2 slash">/</span>
+                                <span class="text-white"><strong>{{ app.user.demandeur.getDateNaissance() }}</strong></span>
+                            </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -24,10 +37,18 @@
                             <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
                             <div class="form-group">
                                 <br>
-                                {% if app.user.demandeur.getCv()==null %}
-                                    <label class="btn btn-primary btn-md btn-file">
-                                        Changer photo<input type="file" name="photoProfile">
-                                    </label>
+                                {% if app.user.demandeur==null%}
+                                    {% if demandeur is defined and demandeur.getCv()==null %}
+                                        <label class="btn btn-primary btn-md btn-file">
+                                            Changer photo<input type="file" name="photoProfile">
+                                        </label>
+                                    {% endif %}
+                                    {% else %}
+                                        {% if app.user.demandeur.getCv()==null %}
+                                            <label class="btn btn-primary btn-md btn-file">
+                                                Changer photo<input type="file" name="photoProfile">
+                                            </label>
+                                        {% endif %}
                                 {% endif %}
                             </div>
                             <div class="form-group">
