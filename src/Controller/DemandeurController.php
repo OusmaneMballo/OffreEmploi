@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DemandeurController extends AbstractController
 {
@@ -35,9 +37,19 @@ class DemandeurController extends AbstractController
     }
 
     /**
-     * @Route("/adddemandeur", name="app_demandeur_add", methods={"POST"})
+     * @Route("/demandeurProfile", name="app_demandeur_profile")
      */
-    public function addDemandeur(Request $request){
+    public function profile(): Response
+    {
+        return $this->render('demandeur/profile.html.twig');
+    }
+
+    /**
+     * @Route("/adddemandeur", name="app_demandeur_add", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function addDemandeur(Request $request, UploadedFile $uploadedFile){
         if($request->isMethod("POST")){
             if ($this->isCsrfTokenValid('demandeur', $request->request->get('demandeur_token'))){
                 $demandeur=new Demandeur();
@@ -51,6 +63,30 @@ class DemandeurController extends AbstractController
                     $demandeur->setDateNaissance($request->request->get('dateNaiss'));
                     $demandeur->setPhoto($request->request->get('photoProfile'));
                     $demandeur->setUser($this->getUser());
+                    dd($request->request->get('photoProfile'));
+                    if(!empty($request->files->get(photoProfile))){
+                        $photoFile = $request->files->get('photoProfile');
+                        $photoFile = $request->files->get('photoProfile');
+                        $photoname = $photoFile->getClientOriginalName ();
+                        $originalFileName=pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                        // Move the file to the directory where photo are stored
+                        try {
+                                $uploadedFile->
+                            $photoFile->move(
+                                $this->getParameter('C:\MyProject\Emploi\emploi\public\photoprofile'),
+
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                            dd("Oups!... erreur de chargement de la photo de profile");
+                        }
+
+                        // updates the 'photoFilename' property to store the PDF file name
+                        // instead of its contents
+                        $demandeur->setPhoto($newFilename);
+                        dd("photo");
+                    }
+                    dd("okey");
                     $this->em->persist($demandeur);
                     $this->em->flush();
                     return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);

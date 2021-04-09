@@ -1,0 +1,97 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Demandeur{% endblock %}
+{% block body %}
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('{{ ('templates/images/hero_1.jpg') }}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="{{ ('templates/images/person_1.jpg') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                    <p class="text-white font-weight-bold">{{ app.user.demandeur.getNomPrenom() }}</p>
+                    <div class="custom-breadcrumbs">
+                        <a href="#">{{ app.user.demandeur.getAdresse() }}</a><span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>{{ app.user.demandeur.getDateNaissance() }}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section">
+        <div class="container">
+            <form method="post" action="{{ path('app_demandeur_add') }}">
+                <div class="p-4 p-md-5 border rounded">
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
+                            <div class="form-group">
+                                <br>
+                                {% if app.user.demandeur.getCv()==null %}
+                                    <label class="btn btn-primary btn-md btn-file">
+                                        Changer photo<input type="file" name="photoProfile">
+                                    </label>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                <label for="job-title">Prenom & Nom</label>
+                                <input type="text" class="form-control" name="nomPrenom" id="job-title" placeholder="Votre Prenom et Nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email de Contact</label>
+                                <input type="text" name="email" class="form-control" id="email" placeholder="you@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-location">Date de Naissance</label>
+                                <input type="text" name="dateNaiss" class="form-control" id="job-location" placeholder="jj/mm/an">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-region">Lieu de Naissance</label>
+                                <select class="selectpicker border rounded" name="lieuNaiss" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                    <option value="dakar">Dakar</option>
+                                    <option value="thies">Thies</option>
+                                    <option value="kaolack">Kaolack</option>
+                                    <option value="fatick">Fatick</option>
+                                    <option value="kafrine">Kafrine</option>
+                                    <option value="tambacounda">Tambacounda</option>
+                                    <option value="matam">Matam</option>
+                                    <option value="kedougou">Kedougou</option>
+                                    <option value="kolda">Kolda</option>
+                                    <option value="sediou">Sediou</option>
+                                    <option value="ziguinchor">Ziguinchor</option>
+                                    <option value="saintLouis">Saint-Louis</option>
+                                    <option value="diourbel">Diourbel</option>
+                                    <option value="louga">Louga</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-location">Adresse</label>
+                                <input type="text" name="adresse" class="form-control" id="job-location" placeholder="Ville, Qtr, num villa">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Genre</label>
+                                <select class="selectpicker border rounded" name="sexe" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Genre">
+                                    <option>Masculin</option>
+                                    <option>Feminin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-4 ml-auto">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="reset" class="btn btn-block btn-light btn-md">Annuler</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-block btn-primary btn-md">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="demandeur_token"
+                       value="{{ csrf_token('demandeur') }}"
+                >
+            </form>
+        </div>
+    </section>
+{% endblock %}
