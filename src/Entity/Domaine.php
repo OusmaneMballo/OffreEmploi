@@ -35,14 +35,15 @@ class Domaine
     private $profiles;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Offre::class, inversedBy="domaines")
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="domaines")
      */
-    private $offre;
+    private $offres;
 
     public function __construct()
     {
         $this->demandeurs = new ArrayCollection();
         $this->profiles = new ArrayCollection();
+        $this->offres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,14 +117,32 @@ class Domaine
         return $this;
     }
 
-    public function getOffre(): ?Offre
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
     {
-        return $this->offre;
+        return $this->offres;
     }
 
-    public function setOffre(?Offre $offre): self
+    public function addOffre(Offre $offre): self
     {
-        $this->offre = $offre;
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setDomaines($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getDomaines() === $this) {
+                $offre->setDomaines(null);
+            }
+        }
 
         return $this;
     }

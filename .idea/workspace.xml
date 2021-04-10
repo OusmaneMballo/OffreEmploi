@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/templates/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/templates/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DemandeurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DemandeurController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Demandeur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Demandeur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Domaine.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Domaine.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Offre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +191,8 @@
       <workItem from="1617824826124" duration="13800000" />
       <workItem from="1617902702298" duration="8882000" />
       <workItem from="1617923767985" duration="929000" />
-      <workItem from="1617999159027" duration="8120000" />
+      <workItem from="1617999159027" duration="10025000" />
+      <workItem from="1618058776012" duration="5743000" />
     </task>
     <servers />
   </component>
@@ -217,11 +219,11 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="567" y="246" key="NewPhpClassDialog/0.0.1536.864@0.0.1536.864" timestamp="1618002494729" />
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1617999167944">
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1618058777283">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1617903651063" />
-    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1617999167944" />
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1618058777283" />
     <state x="425" y="197" key="run.anything.popup" timestamp="1618001033199">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
