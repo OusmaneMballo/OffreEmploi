@@ -91,17 +91,24 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Formations</h2>
                     </div>
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                    {% for formation in app.user.demandeur.getFormation() %}
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4>
+                                            {{ formation.getDateDebut()}} <i class="bi bi-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                </svg></i> {{ formation.getDateFin() }}
+                                        </h4>
+                                        <h4 class="subheading">{{ formation.getIntitule()}}</h4>
+                                        <p class="text-muted">{{ formation.getEtablissement()}}</p>
+                                    </div>
+                                    <div class="timeline-body"><p class="text-muted">{{ formation.getDescription()}}</p></div>
                                 </div>
-                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                            </div>
                         </li>
+                    {% endfor %}
                         <li class="timeline-inverted">
                             <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
                             <div class="timeline-panel">

@@ -49,7 +49,7 @@ class DemandeurController extends AbstractController
      */
     public function profile(): Response
     {
-        return $this->render('demandeur/profile.html.twig');
+        return $this->render('demandeur/profile.html.twig', ["demandeurs"=>$this->demandeurRepository->findAll()]);
     }
 
     /**
