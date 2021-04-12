@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/templates/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/templates/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DemandeurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DemandeurController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/demandeur/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +191,7 @@
       <workItem from="1618058776012" duration="10769000" />
       <workItem from="1618174334951" duration="1186000" />
       <workItem from="1618178519148" duration="3327000" />
-      <workItem from="1618183637754" duration="7047000" />
+      <workItem from="1618183637754" duration="7210000" />
     </task>
     <servers />
   </component>

@@ -97,13 +97,4 @@ class DemandeurController extends AbstractController
             }
         }
     }
-
-    /**
-     * @Route("/adddemandeur", name="app_formation_add", methods={"POST"})
-     */
-    public function addFormation(Request $request){
-        if($request->isMethod("POST")){
-
-        }
-    }
 }
