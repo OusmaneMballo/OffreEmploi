@@ -30,15 +30,15 @@
     </section>
     <br/>
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary section-heading" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" class="btn btn-primary section-heading" data-toggle="modal" data-target="#experince">
         Experience +
     </button>
 
     <button type="button" class="btn btn-primary section-heading" data-toggle="modal" data-target="#exampleModalCenter">
         Formation +
     </button>
-
-    <!-- Modal -->
+    <!--=================================MODAL FORMATION=======================================-->
+    <!-- Modal Formation -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -84,6 +84,54 @@
             </div>
         </div>
     </div>
+
+    <!--=================================MODAL EXPERIENCE=======================================-->
+    <!-- Modal Formation -->
+    <div class="modal fade" id="experince" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ajouter une Experience</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" name="experienceForm" action="{{ path('app_formation_add') }}">
+                        <input type="hidden" name="experience_token"
+                               value="{{ csrf_token('experience') }}"
+                        >
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="debut">Date de debut</label>
+                                <input type="date" name="date_debut" id="debut" class="form-control" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fin">Date de Fin</label>
+                                <input type="date" id="fin" name="date_fin" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="organisation">Structure</label>
+                            <input type="text" class="form-control" name="organisation" id="organisation" placeholder="Nom de la structure" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="post">Post</label>
+                            <input type="text" class="form-control" name="post" id="post" placeholder="Le post que vous avez occupés..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mission">Votre mission</label>
+                            <textarea class="form-control" name="mission" id="description" rows="5"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <input type="submit" value="Ajuter" class="btn btn-primary"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="site-section">
         <div class="container">
             <section class="page-section" id="about">
@@ -91,55 +139,45 @@
                     <div class="text-center">
                         <h2 class="section-heading text-uppercase">Formations</h2>
                     </div>
-                    {% for formation in app.user.demandeur.getFormation() %}
-                        <ul class="timeline">
-                            <li>
-                                <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
-                                <div class="timeline-panel">
-                                    <div class="timeline-heading">
-                                        <h4>
-                                            {{ formation.getDateDebut()}} <i class="bi bi-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                                </svg></i> {{ formation.getDateFin() }}
-                                        </h4>
-                                        <h4 class="subheading">{{ formation.getIntitule()}}</h4>
-                                        <p class="text-muted">{{ formation.getEtablissement()}}</p>
-                                    </div>
-                                    <div class="timeline-body"><p class="text-muted">{{ formation.getDescription()}}</p></div>
-                                </div>
-                        </li>
-                    {% endfor %}
-                        <li class="timeline-inverted">
-                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>
-                                    Be Part
-                                    <br />
-                                    Of Our
-                                    <br />
-                                    Story!
-                                </h4>
-                            </div>
-                        </li>
+                    <ul class="timeline">
+                        {% set posi =1 %}
+                        {% for formation in app.user.demandeur.getFormation() %}
+                            {% if posi==1 %}
+                                    <li>
+                                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-heading">
+                                                <h4>
+                                                    {{ formation.getDateDebut()}} <i class="bi bi-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                        </svg></i> {{ formation.getDateFin() }}
+                                                </h4>
+                                                <h4 class="subheading">{{ formation.getIntitule()}}</h4>
+                                                <p class="text-muted">{{ formation.getEtablissement()}}</p>
+                                            </div>
+                                            <div class="timeline-body"><p class="text-muted">{{ formation.getDescription()}}</p></div>
+                                        </div>
+                                    </li>
+                                    {% set posi =0 %}
+                                    {% else %}
+                                        <li class="timeline-inverted">
+                                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                                            <div class="timeline-panel">
+                                                <div class="timeline-heading">
+                                                    <h4>
+                                                        {{ formation.getDateDebut()}} <i class="bi bi-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                            </svg></i> {{ formation.getDateFin() }}
+                                                    </h4>
+                                                    <h4 class="subheading">{{ formation.getIntitule()}}</h4>
+                                                    <p class="">{{ formation.getEtablissement()}}</p>
+                                                </div>
+                                                <div class="timeline-body"><p class="text-muted">{{ formation.getDescription()}}</p></div>
+                                            </div>
+                                        </li>
+                                        {% set posi =1 %}
+                            {% endif %}
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="container">
