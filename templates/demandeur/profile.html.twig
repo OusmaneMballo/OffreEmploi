@@ -28,91 +28,142 @@
             </div>
         </div>
     </section>
+    <br/>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary section-heading" data-toggle="modal" data-target="#exampleModalCenter">
+        Experience +
+    </button>
+
+    <button type="button" class="btn btn-primary section-heading" data-toggle="modal" data-target="#exampleModalCenter">
+        Formation +
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Ajouter une formation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ path('app_formation_add') }}">
+                        <input type="hidden" name="formation_token"
+                               value="{{ csrf_token('formation') }}"
+                        >
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="debut">Date de debut</label>
+                                <input type="date" name="date_debut" id="debut" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fin">Date de Fin</label>
+                                <input type="date" id="fin" name="date_fin" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="etablissement">Etablissement</label>
+                            <input type="text" class="form-control" name="etablissement" id="etablissement" placeholder="Nom de l'etablissement">
+                        </div>
+                        <div class="form-group">
+                            <label for="intitule">Intitulé</label>
+                            <input type="text" class="form-control" id="intitule" placeholder="Intitulé de la formaation">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description de la formation</label>
+                            <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-primary">Ajuter</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="site-section">
         <div class="container">
-            <form method="post" action="{{ path('app_demandeur_add') }}">
-                <div class="p-4 p-md-5 border rounded">
-                    <div class="row mb-5">
-                        <div class="col-lg-12">
-                            <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
-                            <div class="form-group">
-                                <br>
-                                {% if app.user.demandeur==null%}
-                                    {% if demandeur is defined and demandeur.getCv()==null %}
-                                        <label class="btn btn-primary btn-md btn-file">
-                                            Changer photo<input type="file" name="photoProfile">
-                                        </label>
-                                    {% endif %}
-                                    {% else %}
-                                        {% if app.user.demandeur.getCv()==null %}
-                                            <label class="btn btn-primary btn-md btn-file">
-                                                Changer photo<input type="file" name="photoProfile">
-                                            </label>
-                                        {% endif %}
-                                {% endif %}
-                            </div>
-                            <div class="form-group">
-                                <label for="job-title">Prenom & Nom</label>
-                                <input type="text" class="form-control" name="nomPrenom" id="job-title" placeholder="Votre Prenom et Nom">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email de Contact</label>
-                                <input type="text" name="email" class="form-control" id="email" placeholder="you@gmail.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="job-location">Date de Naissance</label>
-                                <input type="text" name="dateNaiss" class="form-control" id="job-location" placeholder="jj/mm/an">
-                            </div>
-                            <div class="form-group">
-                                <label for="job-region">Lieu de Naissance</label>
-                                <select class="selectpicker border rounded" name="lieuNaiss" id="job-region" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                                    <option value="dakar">Dakar</option>
-                                    <option value="thies">Thies</option>
-                                    <option value="kaolack">Kaolack</option>
-                                    <option value="fatick">Fatick</option>
-                                    <option value="kafrine">Kafrine</option>
-                                    <option value="tambacounda">Tambacounda</option>
-                                    <option value="matam">Matam</option>
-                                    <option value="kedougou">Kedougou</option>
-                                    <option value="kolda">Kolda</option>
-                                    <option value="sediou">Sediou</option>
-                                    <option value="ziguinchor">Ziguinchor</option>
-                                    <option value="saintLouis">Saint-Louis</option>
-                                    <option value="diourbel">Diourbel</option>
-                                    <option value="louga">Louga</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="job-location">Adresse</label>
-                                <input type="text" name="adresse" class="form-control" id="job-location" placeholder="Ville, Qtr, num villa">
-                            </div>
-                            <div class="form-group">
-                                <label for="job-type">Genre</label>
-                                <select class="selectpicker border rounded" name="sexe" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Genre">
-                                    <option>Masculin</option>
-                                    <option>Feminin</option>
-                                </select>
-                            </div>
-                        </div>
+            <section class="page-section" id="about">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Formations</h2>
                     </div>
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>2009-2011</h4>
+                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2011</h4>
+                                    <h4 class="subheading">An Agency is Born</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2011</h4>
+                                    <h4 class="subheading">An Agency is Born</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>
+                                    Be Part
+                                    <br />
+                                    Of Our
+                                    <br />
+                                    Story!
+                                </h4>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <br/>
-                <div class="row align-items-center mb-5">
-                    <div class="col-lg-4 ml-auto">
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="reset" class="btn btn-block btn-light btn-md">Annuler</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-block btn-primary btn-md">Enregistrer</button>
-                            </div>
-                        </div>
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Experiences Professionnelle</h2>
                     </div>
+                    <ul class="timeline">
+                        <li class="timeline-inverted">
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="" alt="" /></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>March 2011</h4>
+                                    <h4 class="subheading">An Agency is Born</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>
+                                    Be Part
+                                    <br />
+                                    Of Our
+                                    <br />
+                                    Story!
+                                </h4>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <input type="hidden" name="demandeur_token"
-                       value="{{ csrf_token('demandeur') }}"
-                >
-            </form>
+            </section>
         </div>
     </section>
 {% endblock %}

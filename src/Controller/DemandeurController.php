@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Demandeur;
+use App\Entity\Domaine;
+use App\Entity\Profile;
 use App\Entity\Role;
 use App\Entity\User;
 use App\service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +23,8 @@ class DemandeurController extends AbstractController
     private $userRepository;
     private $roleRepository;
     private $demandeurRepository;
+    private $domaineRepository;
+    private $profileRepository;
 
     public function __construct(EntityManagerInterface $emi)
     {
@@ -27,6 +32,8 @@ class DemandeurController extends AbstractController
         $this->roleRepository=$this->em->getRepository(Role::class);
         $this->userRepository=$this->em->getRepository(User::class);
         $this->demandeurRepository=$this->em->getRepository(Demandeur::class);
+        $this->domaineRepository=$this->em->getRepository(Domaine::class);
+        $this->profileRepository=$this->em->getRepository(Profile::class);
     }
 
     /**
@@ -34,7 +41,7 @@ class DemandeurController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('demandeur/index.html.twig');
+        return $this->render('demandeur/index.html.twig',["domaines"=>$this->domaineRepository->findAll()]);
     }
 
     /**
@@ -62,6 +69,8 @@ class DemandeurController extends AbstractController
                     $demandeur->setSexe($request->request->get('sexe'));
                     $demandeur->setLieuNaissance($request->request->get('lieuNaiss'));
                     $demandeur->setDateNaissance($request->request->get('dateNaiss'));
+                    $demandeur->setDomaine($this->domaineRepository->find($request->request->get('domaine')));
+                    $demandeur->setProfile($this->profileRepository->find($request->request->get('profile')));
                     $demandeur->setUser($this->getUser());
                     if(!empty($request->files->get('photoProfile'))){
                         $photoFile = $request->files->get('photoProfile');
@@ -86,6 +95,15 @@ class DemandeurController extends AbstractController
                 }
 
             }
+        }
+    }
+
+    /**
+     * @Route("/adddemandeur", name="app_formation_add", methods={"POST"})
+     */
+    public function addFormation(Request $request){
+        if($request->isMethod("POST")){
+
         }
     }
 }
