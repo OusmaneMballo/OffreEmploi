@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/templates/js/scripts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/templates/images/nologo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/demandeur/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entreprise/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +138,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/templates/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/templates/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -147,14 +147,15 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\MyProject\Emploi\emploi\public\templates\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\MyProject\Emploi\emploi\public\templates\images" />
       <recent name="C:\MyProject\Emploi\emploi\public\templates\js" />
       <recent name="C:\MyProject\Emploi\emploi\public\templates" />
       <recent name="C:\MyProject\Emploi\emploi\public\template\nante" />
       <recent name="C:\MyProject\Emploi\emploi\public" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\MyProject\Emploi\emploi\public\templates\images" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -203,7 +204,7 @@
       <workItem from="1618255298626" duration="2439000" />
       <workItem from="1618271624142" duration="6125000" />
       <workItem from="1618353051177" duration="7834000" />
-      <workItem from="1618438631781" duration="2185000" />
+      <workItem from="1618438631781" duration="5716000" />
     </task>
     <servers />
   </component>
@@ -222,10 +223,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="533" y="235" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1617239334272" />
-    <state x="499" y="187" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1618272404829">
+    <state x="499" y="187" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1618447810904">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="499" y="187" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.864@0.0.1536.864" timestamp="1618272404829" />
+    <state x="499" y="187" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.864@0.0.1536.864" timestamp="1618447810904" />
     <state x="567" y="246" key="NewPhpClassDialog" timestamp="1618002494729">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

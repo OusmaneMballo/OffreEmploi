@@ -14,7 +14,6 @@
             </div>
         </div>
     </section>
-
     <section class="site-section" id="next-section">
         <div class="container">
 
@@ -45,6 +44,16 @@
                         <div class="form-group">
                             <img src="{% if app.user.entreprise!=null%}{{ ('photoprofile/')}}{{ app.user.entreprise.logo }}" {% else%} {{ asset('templates/images/nologo.png') }} {%endif%}" alt="Image" class="imageD" width="150px" height="150px"><br>
                         </div>
+
+                        <!--
+                         <div class="form-group">
+                            <br>
+                            <label>
+                                Photo Profile
+                            </label>
+                            <input class="btn btn-primary btn-md btn-file" type="file" name="photoProfile">
+                        </div>
+                         -->
                         <div class="form-group">
                             <label class="btn btn-primary btn-md btn-file">
                                 Choisir Logo
@@ -71,20 +80,23 @@
 
                         <div class="form-group">
                             <label for="secteurs">Secteurs D'Activité</label>
-                            <select class="selectpicker border rounded" multiple="multiple" id="secteurs" name="secteurs[]" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez vos Secteur d'Activité">
+                            <select class="custom-select border rounded" multiple="multiple" id="secteurs" name="secteurs[]" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez vos Secteur d'Activité">
                                 {% for s in secteurs %}
                                     <option value="{{ s.id }}">{{ s.libelle }}</option>
                                 {% endfor%}
                             </select>
                         </div>
-
                         <div class="form-group">
+                            <label for="description">Votre mission</label>
+                            <textarea class="form-control" name="description" id="description" rows="8"></textarea>
+                        </div>
+                        <!--<div class="form-group">
                             <label for="description">Description</label>
                             <div class="editor" id="editor-1">
                                 <p id="val">Description de l'entreprise!</p>
                             </div>
                         </div>
-                        <input type="hidden" name="description" id="description">
+                        <input type="hidden" name="description" id="description">-->
                     </div>
 
                 </div>
