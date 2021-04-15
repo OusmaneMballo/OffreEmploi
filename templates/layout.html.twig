@@ -55,6 +55,11 @@
                             <li><a href="index.html" class="nav-link active">Accueil</a></li>
                             {% if is_granted('ROLE_ENTREPRISE') %}
                                 <li><a href="index.html" class="nav-link active">Demandes Reçus</a></li>
+                                {% if app.user.entreprise==null %}
+                                    <li><a href="{{ path('app_entreprise') }}" class="nav-link active" style="color: #ffd552">Completer mon Profile</a></li>
+                                    {% else %}
+                                        <li><a href="index.html" class="nav-link active">Profile</a></li>
+                                {% endif %}
                                 <li><a href="index.html" class="nav-link active">Profile</a></li>
                                 {% elseif is_granted('ROLE_DEMANDEUR') %}
                                     {% if app.user.demandeur==null %}
@@ -166,8 +171,10 @@
         <script src="{{ ('templates/js/owl.carousel.min.js') }}"></script>
         <script src="{{ ('templates/js/bootstrap-select.min.js') }}"></script>
         <script src="{{ ('templates/js/custom.js') }}"></script>
+        <script src="{{ ('templates/js/scripts.js') }}"></script>
         {#
             <!--
+
              -->
         #}
     {% endblock %}
