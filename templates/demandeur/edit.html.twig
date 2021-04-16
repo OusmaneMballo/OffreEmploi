@@ -1,0 +1,131 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Demandeur{% endblock %}
+{% block body %}
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('{{ ('templates/images/hero_1.jpg') }}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Profile</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Profile</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section">
+        <div class="container">
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2>Mon Profil</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form method="post" action="{{ path('app_demandeur_add') }}" enctype="multipart/form-data">
+                <div class="p-4 p-md-5 border rounded">
+                    <div class="row mb-5">
+                        <div class="col-lg-12">
+                            <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
+                            <img src="{{ ('templates/images/nologo.png') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                            <div class="form-group">
+                                <br>
+                                <label>
+                                    Photo Profile
+                                </label>
+                                <input class="btn btn-primary btn-md btn-file" type="file" name="photoProfile">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-title">Prenom & Nom</label>
+                                <input type="text" class="form-control" name="nomPrenom" id="job-title" placeholder="Votre Prenom et Nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email de Contact</label>
+                                <input type="text" name="email" class="form-control" id="email" placeholder="you@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-location">Date de Naissance</label>
+                                <input type="text" name="dateNaiss" class="form-control" id="job-location" placeholder="jj/mm/an">
+                            </div>
+                            <div class="form-group">
+                                <label for="job-location">Adresse</label>
+                                <input type="text" name="adresse" class="form-control" id="job-location" placeholder="Ville, Qtr, num villa">
+                            </div>
+                            <label for="domaine">Domaine</label>
+                            <select class="custom-select border rounded" name="domaine" required id="domaine" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Domaine">
+                                <option value="" selected disabled>Choisir...</option>
+                                {% if domaines!=null %}
+                                    {% for domaine in domaines %}
+                                        <option value="{{domaine.getId()}}">{{domaine.getLibelle()}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                            <label for="profile">Profile</label>
+                            <select class="custom-select border rounded" name="profile" required id="profile" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Profile">
+                                <option value="" selected disabled>Choisir...</option>
+                                {% if domaines!=null %}
+                                    {% for domaine in domaines %}
+                                        <option value="" disabled style="background-color: #f7f7f7">{{domaine.getLibelle()}}</option>
+                                        {% if domaine.getProfiles()!=null%}
+                                            {% for profile in domaine.getProfiles() %}
+                                                <option value="{{ profile.getId() }}">{{ profile.getLibelle() }}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                            <div class="form-group">
+                                <label for="lieuNaissance">Lieu de Naissance</label>
+                                <select class="custom-select border rounded" name="lieuNaiss" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                    <option value="" selected disabled>Choisir...</option>
+                                    <option value="dakar">Dakar</option>
+                                    <option value="thies">Thies</option>
+                                    <option value="kaolack">Kaolack</option>
+                                    <option value="fatick">Fatick</option>
+                                    <option value="kafrine">Kafrine</option>
+                                    <option value="tambacounda">Tambacounda</option>
+                                    <option value="matam">Matam</option>
+                                    <option value="kedougou">Kedougou</option>
+                                    <option value="kolda">Kolda</option>
+                                    <option value="sediou">Sediou</option>
+                                    <option value="ziguinchor">Ziguinchor</option>
+                                    <option value="saintLouis">Saint-Louis</option>
+                                    <option value="diourbel">Diourbel</option>
+                                    <option value="louga">Louga</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sexe">Sexe</label>
+                                <select class="custom-select border rounded" name="sexe" required id="sexe" data-style="btn-black" data-width="100%" data-live-search="true" title="Sexe">
+                                    <option value="" selected disabled>Choisir...</option>
+                                    <option>Masculin</option>
+                                    <option>Feminin</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-4 ml-auto">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="reset" class="btn btn-block btn-light btn-md">Annuler</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-block btn-primary btn-md">Enregistrer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="demandeur_token"
+                       value="{{ csrf_token('demandeur') }}"
+                >
+            </form>
+        </div>
+    </section>
+{% endblock %}

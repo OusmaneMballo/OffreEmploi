@@ -3,6 +3,13 @@
   width: 90px;
   height: 90px;
 }
+a{
+  color: #FFFFFF;
+}
+a:hover{
+  text-decoration: none;
+  color: #FFFFFF;
+}
 .site-navbar {
   margin-bottom: 0px;
   z-index: 1999;

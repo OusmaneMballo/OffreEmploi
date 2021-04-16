@@ -97,4 +97,15 @@ class DemandeurController extends AbstractController
             }
         }
     }
+
+    /**
+     * @Route("/coupure/{id<[0-9]+>}", name="app_demandeur_edit")
+     *
+     */
+    public function getDemandeurById(int $id){
+        $demandeur=$this->demandeurRepository->find($id);
+        if ($demandeur!=null){
+            return $this->render('demandeur/edit.html.twig', ["demandeur"=>$demandeur]);
+        }
+    }
 }
