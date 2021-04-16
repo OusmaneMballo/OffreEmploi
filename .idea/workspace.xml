@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/demandeur/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/templates/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/templates/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/templates/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/templates/js/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DemandeurController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DemandeurController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/demandeur/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demandeur/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +205,7 @@
       <workItem from="1618271624142" duration="6125000" />
       <workItem from="1618353051177" duration="7834000" />
       <workItem from="1618438631781" duration="6511000" />
-      <workItem from="1618536444357" duration="4141000" />
+      <workItem from="1618536444357" duration="11096000" />
     </task>
     <servers />
   </component>

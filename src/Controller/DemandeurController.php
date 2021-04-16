@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Demande;
 use App\Entity\Demandeur;
 use App\Entity\Domaine;
 use App\Entity\Profile;
@@ -99,13 +100,57 @@ class DemandeurController extends AbstractController
     }
 
     /**
-     * @Route("/coupure/{id<[0-9]+>}", name="app_demandeur_edit")
+     * @Route("/demandeur/{id<[0-9]+>}", name="app_demandeur_edit")
      *
      */
     public function getDemandeurById(int $id){
         $demandeur=$this->demandeurRepository->find($id);
         if ($demandeur!=null){
-            return $this->render('demandeur/edit.html.twig', ["demandeur"=>$demandeur]);
+            return $this->render('demandeur/edit.html.twig',
+                ["demandeur"=>$demandeur, "domaines"=>$this->domaineRepository->findAll()]);
         }
+    }
+
+    /**
+     * @Route("/adddemandeur", name="app_demandeur_add", methods={"POST"})
+     * @param Request $request
+     * @param FileUploader $uploaderFile
+     * @return Response
+     */
+    public function update(Request $request, FileUploader $uploaderFile){
+        if($request->isMethod("POST")){
+            if ($this->isCsrfTokenValid('edit_demandeur', $request->request->get('edit_demandeur_token'))){
+                $demandeur=$this->demandeurRepository->find($request->request->get('id'));
+                $demandeur->setEmail($request->request->get('email'));
+                $demandeur->setNomPrenom($request->request->get('nomPrenom'));
+                $demandeur->setAdresse($request->request->get('adresse'));
+                $demandeur->setSexe($request->request->get('sexe'));
+                $demandeur->setLieuNaissance($request->request->get('lieuNaiss'));
+                $demandeur->setDateNaissance($request->request->get('dateNaiss'));
+                $demandeur->setDomaine($this->domaineRepository->find($request->request->get('domaine')));
+                $demandeur->setProfile($this->profileRepository->find($request->request->get('profile')));
+                if($request->files->get('photoProfile')!=null){
+                    $photoFile = $request->files->get('photoProfile');
+                    //Recuperation du nom du fichier
+                    $photoname = $photoFile->getClientOriginalName ();
+
+                    //On appelle le service de chargement du fichier dans le repertoir specifié
+                    $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\photoprofile',$photoFile,$photoname);
+
+                    //On teste si le fichier est bien chargé
+                    if(!$ok){
+                        return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
+                    }
+                    else{
+                        $demandeur->setPhoto($photoname);
+                    }
+                }
+
+                $this->em->flush();
+                return $this->render('demandeur/profile.html.twig', ["demandeur"=>$demandeur]);
+
+            }
+        }
+        return $this->render('demandeur/profile.html.twig');
     }
 }

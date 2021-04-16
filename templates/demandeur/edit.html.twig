@@ -8,7 +8,7 @@
                     <h1 class="text-white font-weight-bold">Profile</h1>
                     <div class="custom-breadcrumbs">
                         <a href="#">Home</a> <span class="mx-2 slash">/</span>
-                        <span class="text-white"><strong>Profile</strong></span>
+                        <span class="text-white"><strong>Edition Profile</strong></span>
                     </div>
                 </div>
             </div>
@@ -31,33 +31,39 @@
                     <div class="row mb-5">
                         <div class="col-lg-12">
                             <h3 class="text-black mb-5 border-bottom pb-2">Details du profile</h3>
-                            <img src="{{ ('templates/images/nologo.png') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                            {% if demandeur.getPhoto()!=null %}
+                                <img src="{{ ('photoprofile/') }}{{ demandeur.getPhoto() }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                                {% else %}
+                                    <img src="{{ ('templates/images/nologo.png') }}" alt="Image placeholder" class="img-fluid  rounded-circle pp">
+                            {% endif %}
                             <div class="form-group">
                                 <br>
                                 <label>
                                     Photo Profile
                                 </label>
-                                <input class="btn btn-primary btn-md btn-file" type="file" name="photoProfile">
+                                <input class="btn btn-primary btn-md btn-file" type="file" value="" name="photoProfile">
                             </div>
                             <div class="form-group">
                                 <label for="job-title">Prenom & Nom</label>
-                                <input type="text" class="form-control" name="nomPrenom" id="job-title" placeholder="Votre Prenom et Nom">
+                                <input type="text" class="form-control" name="nomPrenom" id="job-title" value="{{ demandeur.getNomPrenom() }}">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email de Contact</label>
-                                <input type="text" name="email" class="form-control" id="email" placeholder="you@gmail.com">
+                                <input type="text" name="email" class="form-control" id="email" value="{{ demandeur.getEmail() }}">
                             </div>
                             <div class="form-group">
                                 <label for="job-location">Date de Naissance</label>
-                                <input type="text" name="dateNaiss" class="form-control" id="job-location" placeholder="jj/mm/an">
+                                <input type="text" name="dateNaiss" class="form-control" id="job-location" value="{{ demandeur.getDateNaissance() }}">
                             </div>
                             <div class="form-group">
                                 <label for="job-location">Adresse</label>
-                                <input type="text" name="adresse" class="form-control" id="job-location" placeholder="Ville, Qtr, num villa">
+                                <input type="text" name="adresse" class="form-control" id="job-location" value="{{ demandeur.getAdresse() }}">
                             </div>
                             <label for="domaine">Domaine</label>
-                            <select class="custom-select border rounded" name="domaine" required id="domaine" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Domaine">
-                                <option value="" selected disabled>Choisir...</option>
+                            <select class="custom-select border rounded" name="domaine" id="domaine" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Domaine">
+                                {% if demandeur.getDomaine()!=null %}
+                                    <option value="{{ demandeur.getDomaine.getId() }}" selected>{{ demandeur.getDomaine.getLibelle() }}</option>
+                                {% endif %}
                                 {% if domaines!=null %}
                                     {% for domaine in domaines %}
                                         <option value="{{domaine.getId()}}">{{domaine.getLibelle()}}</option>
@@ -65,11 +71,13 @@
                                 {% endif %}
                             </select>
                             <label for="profile">Profile</label>
-                            <select class="custom-select border rounded" name="profile" required id="profile" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Profile">
-                                <option value="" selected disabled>Choisir...</option>
+                            <select class="custom-select border rounded" name="profile" id="profile" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Profile">
                                 {% if domaines!=null %}
+                                    {% if demandeur.getProfile()!=null %}
+                                        <option value="{{ demandeur.getProfile.getId() }}" selected>{{ demandeur.getProfile.getLibelle() }}</option>
+                                        {% endif %}
                                     {% for domaine in domaines %}
-                                        <option value="" disabled style="background-color: #f7f7f7">{{domaine.getLibelle()}}</option>
+                                        <option value="{{domaine.getId()}}" disabled style="background-color: #f7f7f7">{{domaine.getLibelle()}}</option>
                                         {% if domaine.getProfiles()!=null%}
                                             {% for profile in domaine.getProfiles() %}
                                                 <option value="{{ profile.getId() }}">{{ profile.getLibelle() }}</option>
@@ -80,8 +88,8 @@
                             </select>
                             <div class="form-group">
                                 <label for="lieuNaissance">Lieu de Naissance</label>
-                                <select class="custom-select border rounded" name="lieuNaiss" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                                    <option value="" selected disabled>Choisir...</option>
+                                <select class="custom-select border rounded" name="lieuNaiss" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                    <option value="{{ demandeur.getLieuNaissance() }}" selected>{{ demandeur.getLieuNaissance() }}</option>
                                     <option value="dakar">Dakar</option>
                                     <option value="thies">Thies</option>
                                     <option value="kaolack">Kaolack</option>
@@ -100,8 +108,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="sexe">Sexe</label>
-                                <select class="custom-select border rounded" name="sexe" required id="sexe" data-style="btn-black" data-width="100%" data-live-search="true" title="Sexe">
-                                    <option value="" selected disabled>Choisir...</option>
+                                <select class="custom-select border rounded" name="sexe" id="sexe" data-style="btn-black" data-width="100%" data-live-search="true" title="Sexe">
+                                    <option value="{{ demandeur.getSexe() }}" selected>{{ demandeur.getSexe() }}</option>
                                     <option>Masculin</option>
                                     <option>Feminin</option>
                                 </select>
@@ -122,9 +130,10 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="demandeur_token"
-                       value="{{ csrf_token('demandeur') }}"
+                <input type="hidden" name="edit_demandeur_token"
+                       value="{{ csrf_token('edit_demandeur') }}"
                 >
+                <input type="text" value="{{ demandeur.getId() }}" name="id" hidden>
             </form>
         </div>
     </section>
