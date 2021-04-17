@@ -46,6 +46,14 @@ class DemandeurController extends AbstractController
     }
 
     /**
+     * @Route("/test", name="app_demandeur_test")
+     */
+    public function test(): Response
+    {
+        return $this->render('demandeur/test.html.twig');
+    }
+
+    /**
      * @Route("/demandeurProfile", name="app_demandeur_profile")
      */
     public function profile(): Response
@@ -100,11 +108,12 @@ class DemandeurController extends AbstractController
     }
 
     /**
-     * @Route("/demandeur/{id<[0-9]+>}", name="app_demandeur_edit")
+     * @Route("/demandeurEdit", name="app_demandeur_edit")
      *
      */
-    public function getDemandeurById(int $id){
-        $demandeur=$this->demandeurRepository->find($id);
+    public function getDemandeurById(){
+        ///demandeur/{id<[0-9]+>}
+        $demandeur=$this->demandeurRepository->find($this->getUser()->getDemandeur()->getId());
         if ($demandeur!=null){
             return $this->render('demandeur/edit.html.twig',
                 ["demandeur"=>$demandeur, "domaines"=>$this->domaineRepository->findAll()]);
