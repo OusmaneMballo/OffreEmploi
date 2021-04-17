@@ -46,14 +46,6 @@ class DemandeurController extends AbstractController
     }
 
     /**
-     * @Route("/test", name="app_demandeur_test")
-     */
-    public function test(): Response
-    {
-        return $this->render('demandeur/test.html.twig');
-    }
-
-    /**
      * @Route("/demandeurProfile", name="app_demandeur_profile")
      */
     public function profile(): Response
@@ -158,6 +150,37 @@ class DemandeurController extends AbstractController
                 $this->em->flush();
                 return $this->render('demandeur/profile.html.twig', ["demandeur"=>$demandeur]);
 
+            }
+        }
+        return $this->render('demandeur/profile.html.twig');
+    }
+    /**
+     * @Route("/uploadcv", name="app_demandeur_cv", methods={"POST"})
+     * @param Request $request
+     * @param FileUploader $uploaderFile
+     * @return Response
+     */
+    public function uploadCv(Request $request, FileUploader $uploaderFile){
+        if($request->isMethod("POST")){
+            $demandeur=$this->demandeurRepository->find($this->getUser()->getDemandeur()->getId());
+            if ($demandeur!=null){
+                if($request->files->get('cv')!=null){
+                    $cvFile = $request->files->get('cv');
+                    //Recuperation du nom du fichier
+                    $cvname = $cvFile->getClientOriginalName ();
+
+                    //On appelle le service de chargement du fichier dans le repertoir specifié
+                    $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\cv',$cvFile,$cvname);
+
+                    //On teste si le fichier est bien chargé
+                    if(!$ok){
+                        return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur, "error-cv"=>true]);
+                    }
+                    else{
+                        $demandeur->setCv($cvname);
+                        $this->em->flush();
+                    }
+                }
             }
         }
         return $this->render('demandeur/profile.html.twig');

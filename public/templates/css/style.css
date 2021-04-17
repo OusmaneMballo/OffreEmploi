@@ -10,6 +10,11 @@ a:hover{
   text-decoration: none;
   color: #FFFFFF;
 }
+
+.espacement{
+  margin-left: 5px;
+}
+
 .site-navbar {
   margin-bottom: 0px;
   z-index: 1999;
