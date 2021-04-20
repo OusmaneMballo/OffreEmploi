@@ -17,4 +17,20 @@ class WelcomController extends AbstractController
             'controller_name' => 'WelcomController',
         ]);
     }
+
+    /**
+     * @Route("/propos", name="welcom_propos")
+     */
+    public function propos(): Response
+    {
+        return $this->render('welcom/propos.html.twig');
+    }
+
+    /**
+     * @Route("/contacts", name="welcom_contact")
+     */
+    public function contact(): Response
+    {
+        return $this->render('welcom/contact.html.twig');
+    }
 }

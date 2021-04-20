@@ -52,9 +52,9 @@
                     </div>
                     <nav class="mx-auto site-navigation">
                         <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                            <li><a href="index.html" class="nav-link active">Accueil</a></li>
+                            <li><a href="{{ path('welcom') }}" class="nav-link active">Accueil</a></li>
                             {% if is_granted('ROLE_ENTREPRISE') %}
-                                <li><a href="index.html" class="nav-link active">Demandes Reçus</a></li>
+                                <li><a href="{{ path('app_demande') }}" class="nav-link active">Demandes Reçus</a></li>
                                 {% if app.user.entreprise==null %}
                                     <li><a href="{{ path('app_entreprise') }}" class="nav-link active" style="color: #ffd552">Completer mon Profile</a></li>
                                     {% else %}
@@ -68,12 +68,12 @@
                                         <li disabled>Offres</li>
                                         {% else %}
                                             <li><a href="{{ path('app_demandeur_profile') }}" class="nav-link active">Profile</a></li>
-                                            <li><a href="index.html" class="nav-link active">Demandes</a></li>
-                                            <li><a href="index.html" class="nav-link active">Offres</a></li>
+                                            <li><a href="{{ path('app_demande') }}" class="nav-link active">Demandes</a></li>
+                                            <li><a href="{{ path('app_offre') }}" class="nav-link active">Offres</a></li>
                                     {% endif %}
                                 {% else %}
-                                    <li><a href="about.html">A Propos</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{ path('welcom_propos') }}">A Propos</a></li>
+                                    <li><a href="{{ path('welcom_contact') }}">Contact</a></li>
                             {% endif %}
                         </ul>
                     </nav>
