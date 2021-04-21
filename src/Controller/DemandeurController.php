@@ -185,4 +185,8 @@ class DemandeurController extends AbstractController
         }
         return $this->render('demandeur/profile.html.twig');
     }
+
+    public function supprimerCV(string $uploadDirCv){
+
+    }
 }
