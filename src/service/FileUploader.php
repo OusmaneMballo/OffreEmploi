@@ -24,4 +24,11 @@ class FileUploader
             return false;
         }
     }
+
+    function delete($file){
+        if (file_exists($file)){
+            return unlink($file);
+        }
+        return false;
+    }
 }

@@ -57,9 +57,11 @@ class DemandeurController extends AbstractController
     /**
      * @Route("/adddemandeur", name="app_demandeur_add", methods={"POST"})
      * @param Request $request
+     * @param FileUploader $uploaderFile
+     * @param string $uploadPhotoProfil
      * @return Response
      */
-    public function addDemandeur(Request $request, FileUploader $uploaderFile){
+    public function addDemandeur(Request $request, FileUploader $uploaderFile, string $uploadPhotoProfil){
         if($request->isMethod("POST")){
             if ($this->isCsrfTokenValid('demandeur', $request->request->get('demandeur_token'))){
                 $demandeur=new Demandeur();
@@ -81,7 +83,7 @@ class DemandeurController extends AbstractController
                         $photoname = $photoFile->getClientOriginalName ();
 
                         //On appelle le service de chargement du fichier dans le repertoir specifié
-                        $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\photoprofile',$photoFile,$photoname);
+                        $ok=$uploaderFile->upload($uploadPhotoProfil,$photoFile,$photoname);
 
                         //On teste si le fichier est bien chargé
                         if(!$ok){
@@ -93,7 +95,7 @@ class DemandeurController extends AbstractController
                     }
                     $this->em->persist($demandeur);
                     $this->em->flush();
-                    return $this->render('demandeur/profile.html.twig', ["demandeur"=>$demandeur]);
+                    return $this->redirectToRoute('app_demandeur_profile');
                 }
 
             }
@@ -119,7 +121,7 @@ class DemandeurController extends AbstractController
      * @param FileUploader $uploaderFile
      * @return Response
      */
-    public function update(Request $request, FileUploader $uploaderFile){
+    public function update(Request $request, FileUploader $uploaderFile, string $uploadPhotoProfil){
         if($request->isMethod("POST")){
             if ($this->isCsrfTokenValid('edit_demandeur', $request->request->get('edit_demandeur_token'))){
                 $demandeur=$this->demandeurRepository->find($request->request->get('id'));
@@ -135,21 +137,23 @@ class DemandeurController extends AbstractController
                     $photoFile = $request->files->get('photoProfile');
                     //Recuperation du nom du fichier
                     $photoname = $photoFile->getClientOriginalName ();
+                    $oldPhoto=$uploadPhotoProfil."/".$demandeur->getPhoto();
+                    if ($uploaderFile->delete($oldPhoto)){
+                        //On appelle le service de chargement du fichier dans le repertoir specifié
+                        $ok=$uploaderFile->upload($uploadPhotoProfil,$photoFile,$photoname);
 
-                    //On appelle le service de chargement du fichier dans le repertoir specifié
-                    $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\photoprofile',$photoFile,$photoname);
-
-                    //On teste si le fichier est bien chargé
-                    if(!$ok){
-                        return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
-                    }
-                    else{
-                        $demandeur->setPhoto($photoname);
+                        //On teste si le fichier est bien chargé
+                        if(!$ok){
+                            return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
+                        }
+                        else{
+                            $demandeur->setPhoto($photoname);
+                        }
                     }
                 }
 
                 $this->em->flush();
-                return $this->render('demandeur/profile.html.twig', ["demandeur"=>$demandeur]);
+                return $this->redirectToRoute('app_demandeur_profile');
 
             }
         }
@@ -161,7 +165,7 @@ class DemandeurController extends AbstractController
      * @param FileUploader $uploaderFile
      * @return Response
      */
-    public function uploadCv(Request $request, FileUploader $uploaderFile){
+    public function uploadCv(Request $request, FileUploader $uploaderFile, string $uploadDirCv){
         if($request->isMethod("POST")){
             $demandeur=$this->demandeurRepository->find($this->getUser()->getDemandeur()->getId());
             if ($demandeur!=null){
@@ -171,7 +175,7 @@ class DemandeurController extends AbstractController
                     $cvname = $cvFile->getClientOriginalName ();
 
                     //On appelle le service de chargement du fichier dans le repertoir specifié
-                    $ok=$uploaderFile->upload('C:\MyProject\Emploi\emploi\public\cv',$cvFile,$cvname);
+                    $ok=$uploaderFile->upload($uploadDirCv,$cvFile,$cvname);
 
                     //On teste si le fichier est bien chargé
                     if(!$ok){
@@ -180,6 +184,7 @@ class DemandeurController extends AbstractController
                     else{
                         $demandeur->setCv($cvname);
                         $this->em->flush();
+                        return $this->redirectToRoute('app_demandeur_profile');
                     }
                 }
             }
@@ -200,7 +205,7 @@ class DemandeurController extends AbstractController
             if($fileDeleteService->delete($file)){
                 $demandeur->setCv("");
                 $this->em->flush();
-                return $this->render('demandeur/profile.html.twig');
+                return $this->redirectToRoute('app_demandeur_profile');
             }
             return $this->render('demandeur/profile.html.twig');
         }
