@@ -8,6 +8,7 @@ use App\Entity\Domaine;
 use App\Entity\Profile;
 use App\Entity\Role;
 use App\Entity\User;
+use App\service\FileDeleteService;
 use App\service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
@@ -186,7 +187,22 @@ class DemandeurController extends AbstractController
         return $this->render('demandeur/profile.html.twig');
     }
 
-    public function supprimerCV(string $uploadDirCv){
-
+    /**
+     * @Route("/delete_cv", name="app_delete_cv")
+     * @param string $uploadDirCv
+     * @param FileDeleteService $fileDeleteService
+     * @return Response
+     */
+    public function supprimerCV(string $uploadDirCv, FileDeleteService $fileDeleteService){
+        $demandeur=$this->demandeurRepository->find($this->getUser()->getDemandeur()->getId());
+        if ($demandeur!=null){
+            $file=$uploadDirCv.$demandeur->getCv();
+            if($fileDeleteService->delete($file)){
+                $demandeur->setCv("");
+                $this->em->flush();
+                return $this->render('demandeur/profile.html.twig');
+            }
+            return $this->render('demandeur/profile.html.twig');
+        }
     }
 }
