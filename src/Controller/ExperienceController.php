@@ -59,4 +59,17 @@ class ExperienceController extends AbstractController
         }
         return new RedirectResponse('/demandeurProfile', ["error"=>true]);
     }
+
+    /**
+     * @Route("/experience/delete/{id<[0-9]+>}", name="app_experience_delete")
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deleteExperience($id){
+        if($id!=null){
+            $this->em->remove($this->experienceRepos->find($id));
+            $this->em->flush();
+        }
+        return new RedirectResponse('/demandeurProfile');
+    }
 }
