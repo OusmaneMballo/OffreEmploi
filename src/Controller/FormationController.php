@@ -74,4 +74,17 @@ class FormationController extends AbstractController
             }
         return new RedirectResponse('/demandeurProfile');
     }
+
+    /**
+     * @Route("/formation/{id<[0-9]+>}/edit", name="app_formation_edit")
+     * @param $id
+     * @return Response
+     */
+    function edit($id){
+        if ($id!=null){
+            $formation=$this->formationRepository->find($id);
+            return $this->render('demandeur/profile.html.twig',["edit"=>true,"formation"=>$formation]);
+        }
+        return new RedirectResponse('/demandeurProfile');
+    }
 }
