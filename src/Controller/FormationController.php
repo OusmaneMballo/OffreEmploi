@@ -61,4 +61,17 @@ class FormationController extends AbstractController
         }
         return new RedirectResponse('/demandeurProfile', ["error"=>true]);
     }
+
+    /**
+     * @Route("/formation/delete/{id<[0-9]+>}", name="app_formation_delete")
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function deleteFormation($id){
+            if($id!=null){
+                $this->em->remove($this->formationRepository->find($id));
+                $this->em->flush();
+            }
+        return new RedirectResponse('/demandeurProfile');
+    }
 }
