@@ -44,6 +44,11 @@ class Demande
      */
     private $offre;
 
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $reponse;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +110,18 @@ class Demande
     public function setOffre(?Offre $offre): self
     {
         $this->offre = $offre;
+
+        return $this;
+    }
+
+    public function getReponse(): ?string
+    {
+        return $this->reponse;
+    }
+
+    public function setReponse(?string $reponse): self
+    {
+        $this->reponse = $reponse;
 
         return $this;
     }

@@ -1,20 +1,117 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello OffreController!{% endblock %}
-
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Offre{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url('{{ ('templates/images/hero_1.jpg') }}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">Post A Job</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="#">Job</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Post a Job</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br/><br/>
+    <section class="site-section">
+        <div class="container">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2>Poster une offre</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <form class="p-4 p-md-5 border rounded" method="post">
+                        <h3 class="text-black mb-5 border-bottom pb-2">Details de l'offre</h3>
+                        <div class="form-group">
+                            <label for="job-title">Titre</label>
+                            <input type="text" class="form-control" id="job-title" placeholder="Product Designer">
+                        </div>
+                        <div class="form-group">
+                            <label for="domaine">Domaine</label>
+                            <select class="custom-select border rounded" name="domaine" required id="domaine" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Domaine">
+                                <option value="" selected disabled>Choisir...</option>
+                                {% if domaines!=null %}
+                                    {% for domaine in domaines %}
+                                        <option value="{{domaine.getId()}}">{{domaine.getLibelle()}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="lieuNaissance">Lieu de Naissance</label>
+                            <select class="custom-select border rounded" name="lieuNaiss" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                <option value="" selected disabled>Choisir...</option>
+                                <option value="dakar">Dakar</option>
+                                <option value="thies">Thies</option>
+                                <option value="kaolack">Kaolack</option>
+                                <option value="fatick">Fatick</option>
+                                <option value="kafrine">Kafrine</option>
+                                <option value="tambacounda">Tambacounda</option>
+                                <option value="matam">Matam</option>
+                                <option value="kedougou">Kedougou</option>
+                                <option value="kolda">Kolda</option>
+                                <option value="sediou">Sediou</option>
+                                <option value="ziguinchor">Ziguinchor</option>
+                                <option value="saintLouis">Saint-Louis</option>
+                                <option value="diourbel">Diourbel</option>
+                                <option value="louga">Louga</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-type">Type</label>
+                            <select class="custom-select border rounded" name="jobType" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
+                                <option value="" selected disabled>Choisir...</option>
+                                <option value="dakar">Temps Plain</option>
+                                <option value="dakar">Temps Partiel</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mission">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="10"></textarea>
+                        </div>
+                        <input type="hidden" name="offre_token"
+                               value="{{ csrf_token('offre') }}"
+                        >
+                    </form>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/MyProject/Emploi/emploi/src/Controller/OffreController.php'|file_link(0) }}">src/Controller/OffreController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/MyProject/Emploi/emploi/templates/offre/index.html.twig'|file_link(0) }}">templates/offre/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+            </div>
+            <div class="row align-items-center mb-5">
+
+                <div class="col-lg-4 ml-auto">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-primary btn-md">Save Job</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

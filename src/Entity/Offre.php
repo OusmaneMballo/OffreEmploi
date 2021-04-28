@@ -55,6 +55,16 @@ class Offre
      */
     private $domaines;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->domaines = new ArrayCollection();
@@ -163,6 +173,30 @@ class Offre
     public function setDomaines(?Domaine $domaines): self
     {
         $this->domaines = $domaines;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

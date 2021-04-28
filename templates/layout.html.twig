@@ -60,7 +60,6 @@
                                     {% else %}
                                         <li><a href="index.html" class="nav-link active">Profile</a></li>
                                 {% endif %}
-                                <li><a href="index.html" class="nav-link active">Profile</a></li>
                                 {% elseif is_granted('ROLE_DEMANDEUR') %}
                                     {% if app.user.demandeur==null %}
                                         <li><a href="{{ path('app_demandeur') }}" class="nav-link active" style="color: #ffd552">Completer mon Profile</a></li>
@@ -81,7 +80,7 @@
                     <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
                         <div class="ml-auto">
                             {% if is_granted('ROLE_ENTREPRISE') %}
-                                <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Poster une offre</a>
+                                <a href="{{ path('app_offre') }}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Poster une offre</a>
                                 {% elseif is_granted('ROLE_DEMANDEUR') %}
                                 {% else %}
                                     <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Poster une offre</a>
