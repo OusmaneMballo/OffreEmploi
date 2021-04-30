@@ -30,7 +30,7 @@ class Offre
     private $description;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $niveau_etude;
 
