@@ -6,11 +6,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1 class="text-white font-weight-bold">Poster une offre</h1>
+                    <h1 class="text-white font-weight-bold">Modifier une offre</h1>
                     <div class="custom-breadcrumbs">
                         <a href="#">Home</a> <span class="mx-2 slash">/</span>
                         <a href="#">Job</a> <span class="mx-2 slash">/</span>
-                        <span class="text-white"><strong>Offre</strong></span>
+                        <span class="text-white"><strong>Offre</strong></span><span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Modification</strong></span>
                     </div>
                 </div>
             </div>
@@ -24,23 +25,22 @@
                 <div class="col-lg-8 mb-4 mb-lg-0">
                     <div class="d-flex align-items-center">
                         <div>
-                            <h2>Poster une offre</h2>
+                            <h2>Modifier une offre</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12">
-                    <form class="p-4 p-md-5 border rounded" action="{{ path('app_offre_add') }}" method="post">
-                        <h3 class="text-black mb-5 border-bottom pb-2">Details de l'offre</h3>
+                    <form class="p-4 p-md-5 border rounded" action="{{ path('app_offre_update') }}" method="post">
                         <div class="form-group">
                             <label for="job-title">Titre</label>
-                            <input type="text" name="titre" class="form-control" id="job-title" placeholder="Product Designer" required>
+                            <input type="text" name="titre" value="{{ offre.getTitre() }}" class="form-control" id="job-title" placeholder="Titre du poste" required>
                         </div>
                         <div class="form-group">
                             <label for="domaine">Domaine</label>
                             <select class="custom-select border rounded" name="domaine" required id="domaine" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Domaine">
-                                <option value="" selected disabled>Choisir...</option>
+                                <option value="{{  offre.getDomaines.getId() }}" selected>{{  offre.getDomaines.getLibelle() }}</option>
                                 {% if domaines!=null %}
                                     {% for domaine in domaines %}
                                         <option value="{{domaine.getId()}}">{{domaine.getLibelle()}}</option>
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label for="domaine">Niveau d'étude</label>
                             <select class="custom-select border rounded" name="niveauEtude" required id="niveau" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Niveau d'etude">
-                                <option value="" selected disabled>Choisir...</option>
+                                <option value="{{ offre.getNiveauEtude()}}" selected>{{ offre.getNiveauEtude()}}</option>
                                 <option value="bac">Bac</option>
                                 <option value="bac+2">Bac+2</option>
                                 <option value="licence">Licence</option>
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="domaine">Année d'experience</label>
                             <select class="custom-select border rounded" name="anneeExperience" required id="anneeExperience" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Annee d'experience">
-                                <option value="" selected disabled>Choisir...</option>
+                                <option value="{{ offre.getNbrAnneeExperience() }}" selected>{{ offre.getNbrAnneeExperience() }}</option>
                                 <option value="0">Nouveau diplomé</option>
                                 <option value="1">1 an</option>
                                 <option value="2">2 à 3 ans</option>
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label for="lieuNaissance">Ville</label>
                             <select class="custom-select border rounded" name="ville" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                                <option value="" selected disabled>Choisir...</option>
+                                <option value="{{ offre.getVille() }}" selected>{{ offre.getVille() }}</option>
                                 <option value="dakar">Dakar</option>
                                 <option value="thies">Thies</option>
                                 <option value="kaolack">Kaolack</option>
@@ -93,25 +93,26 @@
                         </div>
                         <div class="form-group">
                             <label for="job-type">Type</label>
-                            <select class="custom-select border rounded" name="jobType" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Region">
-                                <option value="" selected disabled>Choisir...</option>
+                            <select class="custom-select border rounded" name="jobType" required data-style="btn-black" data-width="100%" data-live-search="true" title="Select Type">
+                                <option value="{{ offre.getType() }}" selected>{{ offre.getType() }}</option>
                                 <option value="Temps Plain">Temps Plain</option>
                                 <option value="Temps Partiel">Temps Partiel</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="mission">Description</label>
-                            <textarea class="form-control" required name="description" id="description" rows="10"></textarea>
+                            <textarea class="form-control" required name="description" id="description" rows="10">{{ offre.getDescription() }}</textarea>
                         </div>
-                        <input type="hidden" name="offre_token" value="{{ csrf_token('offre') }}">
+                        <input type="hidden" name="offre_edit_token" value="{{ csrf_token('edit') }}">
+                        <input type="text" value="{{ offre.getId() }}" name="id" hidden>
                         <div class="row align-items-center mb-5">
                             <div class="col-lg-4 ml-auto">
                                 <div class="row">
                                     <div class="col-6">
-                                        <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Annuler</a>
+                                        <a href="{{ path('app_offre') }}" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Annuler</a>
                                     </div>
                                     <div class="col-6">
-                                        <input type="submit" value="Poster" class="btn btn-block btn-primary btn-md"/>
+                                        <input type="submit" value="Valider" class="btn btn-block btn-primary btn-md"/>
                                     </div>
                                 </div>
                             </div>

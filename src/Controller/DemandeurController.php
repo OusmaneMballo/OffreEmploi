@@ -104,10 +104,8 @@ class DemandeurController extends AbstractController
 
     /**
      * @Route("/demandeurEdit", name="app_demandeur_edit")
-     *
      */
     public function getDemandeurById(){
-        ///demandeur/{id<[0-9]+>}
         $demandeur=$this->demandeurRepository->find($this->getUser()->getDemandeur()->getId());
         if ($demandeur!=null){
             return $this->render('demandeur/edit.html.twig',
@@ -116,7 +114,7 @@ class DemandeurController extends AbstractController
     }
 
     /**
-     * @Route("/adddemandeur", name="app_demandeur_add", methods={"POST"})
+     * @Route("/updatedemandeur", name="app_demandeur_update", methods={"POST"})
      * @param Request $request
      * @param FileUploader $uploaderFile
      * @return Response
@@ -136,7 +134,7 @@ class DemandeurController extends AbstractController
                 if($request->files->get('photoProfile')!=null){
                     $photoFile = $request->files->get('photoProfile');
                     //Recuperation du nom du fichier
-                    $photoname = $photoFile->getClientOriginalName ();
+                    $photoname = $photoFile->getClientOriginalName();
                     $oldPhoto=$uploadPhotoProfil."/".$demandeur->getPhoto();
                     if ($uploaderFile->delete($oldPhoto)){
                         //On appelle le service de chargement du fichier dans le repertoir specifié

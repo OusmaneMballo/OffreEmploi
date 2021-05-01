@@ -6,11 +6,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1 class="text-white font-weight-bold">{{ offre.getTitre() }}</h1>
+                    <h1 class="text-white font-weight-bold"> {{ offre.getTitre() }} </h1>
                     <div class="custom-breadcrumbs">
+
                         <a href="#">Home</a> <span class="mx-2 slash">/</span>
                         <a href="#">poste</a> <span class="mx-2 slash">/</span>
                         <span class="text-white"><strong>Detail</strong></span>
+
                     </div>
                 </div>
             </div>
@@ -34,10 +36,10 @@
                 <div class="col-lg-4">
                     <div class="row">
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
+                            <a href="{{ path("app_offre_delete", {'id': offre.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
                         </div>
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Modifier</a>
+                            <a href="{{ path("app_offre_edit", {'id': offre.getId()}) }}" class="btn btn-block btn-primary btn-md">Modifier</a>
                         </div>
                     </div>
                 </div>
@@ -59,10 +61,10 @@
 
                     <div class="row mb-5">
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
+                            <a href="{{ path("app_offre_delete", {'id': offre.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
                         </div>
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Modifier</a>
+                            <a href="{{ path("app_offre_edit", {'id': offre.getId()}) }}" class="btn btn-block btn-primary btn-md">Modifier</a>
                         </div>
                     </div>
 

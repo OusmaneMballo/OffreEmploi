@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Domaine;
 use App\Entity\Offre;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,6 +47,8 @@ class OffreController extends AbstractController
 
     /**
      * @Route("/offre/{id<[0-9]+>}", name="app_one_offre")
+     * @param $id
+     * @return Response
      */
     public function offre($id): Response
     {
@@ -60,6 +63,8 @@ class OffreController extends AbstractController
 
     /**
      * @Route("/addoffre", name="app_offre_add", methods={"POST"})
+     * @param Request $request
+     * @return Response
      */
     public function addOffre(Request $request): Response
     {
@@ -81,5 +86,58 @@ class OffreController extends AbstractController
             }
         }
         return $this->redirectToRoute("app_offre");
+    }
+
+    /**
+     * @Route("/edit/{id<[0-9]+>}", name="app_offre_edit")
+     * @param $id
+     * @return Response
+     */
+    public function edit($id): Response
+    {
+        if($id!=null){
+            return $this->render('offre/edit.html.twig', ['offre' => $this->offreRepository->find($id), "domaines"=>$this->domaineRepository->findAll()]);
+        }
+        return $this->redirectToRoute("app_offre");
+    }
+
+    /**
+     * @Route("/updateOffre", name="app_offre_update", methods={"POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function update(Request $request){
+        $id=$request->request->get('id');
+        if ($request->isMethod("POST")){
+            if ($this->isCsrfTokenValid('edit', $request->request->get('offre_edit_token'))){
+                $offre=$this->offreRepository->find($id);
+                $offre->setDescription($request->request->get('description'));
+                $offre->setDomaines($this->domaineRepository->find($request->request->get('domaine')));
+                $offre->setTitre($request->request->get('titre'));
+                $offre->setType($request->request->get('jobType'));
+                $offre->setVille($request->request->get('ville'));
+                $offre->setNiveauEtude($request->request->get('niveauEtude'));
+                $offre->setNbrAnneeExperience($request->request->get('anneeExperience'));
+                $offre->setEntreprise($this->getUser()->getEntreprise());
+                $this->em->flush();
+                return $this->redirectToRoute("app_one_offre", ['id'=>$id]);
+            }
+        }
+        return $this->redirectToRoute("app_offre_edit", ['id'=>$id]);
+    }
+
+    /**
+     * @Route("/deleteoffre/{id<[0-9]+>}", name="app_offre_delete")
+     * @param $id
+     * @return Response
+     */
+    public function delete($id): Response
+    {
+        if($id!=null){
+            $this->em->remove($this->offreRepository->find($id));
+            $this->em->flush();
+            return $this->redirectToRoute("app_offre");
+        }
+        return $this->redirectToRoute("app_one_offre", ['id'=>$id]);
     }
 }
