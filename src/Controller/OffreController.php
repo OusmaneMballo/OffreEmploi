@@ -24,9 +24,22 @@ class OffreController extends AbstractController
     }
 
     /**
-     * @Route("/offre", name="app_offre")
+     * @Route("/offres", name="app_offre")
      */
     public function index(): Response
+    {
+        $offres=$this->offreRepository->findByEntreprise($this->getUser()->getEntreprise());
+        $size=0;
+        foreach ($offres as $offre){
+            $size++;
+        }
+        return $this->render('offre/offre.html.twig', ['offres' => $offres, 'size'=>$size]);
+    }
+
+    /**
+     * @Route("/offreadd", name="app_offre_form")
+     */
+    public function form(): Response
     {
         return $this->render('offre/index.html.twig', ['domaines' => $this->domaineRepository->findAll(),]);
     }
