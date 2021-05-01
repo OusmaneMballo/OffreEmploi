@@ -33,7 +33,7 @@ class OffreController extends AbstractController
         foreach ($offres as $offre){
             $size++;
         }
-        return $this->render('offre/offre.html.twig', ['offres' => $offres, 'size'=>$size]);
+        return $this->render('offre/listeoffres.html.twig', ['offres' => $offres, 'size'=>$size]);
     }
 
     /**
@@ -42,6 +42,19 @@ class OffreController extends AbstractController
     public function form(): Response
     {
         return $this->render('offre/index.html.twig', ['domaines' => $this->domaineRepository->findAll(),]);
+    }
+
+    /**
+     * @Route("/offre/{id<[0-9]+>}", name="app_one_offre")
+     */
+    public function offre($id): Response
+    {
+        $offres=$this->offreRepository->findByEntreprise($this->getUser()->getEntreprise());
+        $size=0;
+        foreach ($offres as $offre){
+            $size++;
+        }
+        return $this->render('offre/offre.html.twig', ['offre' => $this->offreRepository->find($id), "entreprise"=>$this->getUser()->getEntreprise(), "offres"=>$offres, "size"=>$size]);
     }
 
 

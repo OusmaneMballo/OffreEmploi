@@ -2,87 +2,116 @@
 {% block title %}Emploi | Offre{% endblock %}
 {% block body %}
     <!-- HOME -->
-    <section class="section-hero home-section overlay inner-page bg-image" style="background-image: url('{{ ('templates/images/hero_1.jpg') }}');" id="home-section">
+    <section class="section-hero overlay inner-page bg-image" style="background-image:url('{{ ('/templates/images/hero_1.jpg') }}');" id="home-section">
         <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-md-12">
-                    <div class="mb-5 text-center">
-                        <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, quas fugit ex!</p>
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold">{{ offre.getTitre() }}</h1>
+                    <div class="custom-breadcrumbs">
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="#">poste</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Detail</strong></span>
                     </div>
-                    <form method="post" class="search-jobs-form">
-                        <div class="row mb-5">
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Region">
-                                    <option>Anywhere</option>
-                                    <option>San Francisco</option>
-                                    <option>Palo Alto</option>
-                                    <option>New York</option>
-                                    <option>Manhattan</option>
-                                    <option>Ontario</option>
-                                    <option>Toronto</option>
-                                    <option>Kansas</option>
-                                    <option>Mountain View</option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Job Type">
-                                    <option>Part Time</option>
-                                    <option>Full Time</option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 popular-keywords">
-                                <h3>Trending Keywords:</h3>
-                                <ul class="keywords list-unstyled m-0 p-0">
-                                    <li><a href="#" class="">UI Designer</a></li>
-                                    <li><a href="#" class="">Python</a></li>
-                                    <li><a href="#" class="">Developer</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-        <a href="#next" class="scroll-button smoothscroll">
-            <span class=" icon-keyboard_arrow_down"></span>
-        </a>
     </section>
-    <section class="site-section" id="next">
+    <section class="site-section">
         <div class="container">
-            <div class="row mb-5 justify-content-center">
-                <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">{{ size }} Job Listed</h2>
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2>{{ offre.getTitre() }}</h2>
+                            <div>
+                                <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{entreprise.getNom()}}</span>
+                                <span class="m-2"><span class="icon-room mr-2"></span>{{entreprise.getAdresse()}}</span>
+                                <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ offre.getType() }}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-primary btn-md">Modifier</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Description du poste</h3>
+                        <p>{{ offre.getDescription() }}</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Education + Experience</h3>
+                        <ul class="list-unstyled m-0 p-0">
+                            <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Niveau d'étude minimum {{ offre.getNiveauEtude() }}</span></li>
+                            <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Expérience minimum {{ offre.getNbrAnneeExperience() }}</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Supprimer</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-primary btn-md">Modifier</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-light p-3 border rounded mb-4">
+                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Autre informations</h3>
+                        <ul class="list-unstyled pl-3 mb-0">
+                            <li class="mb-2"><strong class="text-black">Timing:</strong> {{ offre.getType() }}</li>
+                            <li class="mb-2"><strong class="text-black">Experience:</strong> {{ offre.getNbrAnneeExperience() }} an(s)</li>
+                            <li class="mb-2"><strong class="text-black">Localisation:</strong> {{ offre.getVille() }}</li>
+                            <li class="mb-2"><strong class="text-black">Sexe:</strong> Masculin & Feminin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-section" id="next">
+        <div class="container">
+
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2">{{ size }} Offres publiées</h2>
+                </div>
+            </div>
+
             <ul class="job-listings mb-5">
                 {% if offres!=null %}
                     {% for offre in offres %}
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                            <a href="job-single.html"></a>
+                            <a href="{{ path("app_one_offre", {'id':offre.getId()}) }}"></a>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
                                 <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
                                     <h2>{{offre.getTitre()}}</h2>
-                                    <strong>{{offre.getEntreprise.getNom()}}</strong>
+                                    <strong>{{offre.getEntreprise.getNom()}} | {{offre.getEntreprise.getAdresse()}}</strong>
+                                    <strong></strong>
                                 </div>
                                 <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
-                                    <span class="icon-room"></span> {{offre.getVille()}}
+                                    <span class="icon-room"></span>{{offre.getVille()}}
                                 </div>
                                 <div class="job-listing-meta">
                                     {% if offre.getType()=="Temps Plain" %}
                                         <span class="badge badge-success">Temps Plain</span>
-                                        {% else %}
-                                            {% if offre.getType()=="Temps Partiel" %}
-                                                <span class="badge badge-warning">Temps Partiel</span>
-                                            {% endif %}
+                                    {% else %}
+                                        {% if offre.getType()=="Temps Partiel" %}
+                                            <span class="badge badge-warning">Temps Partiel</span>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>
