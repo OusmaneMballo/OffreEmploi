@@ -1,0 +1,163 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Offre{% endblock %}
+{% block body %}
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image:url('{{ ('/templates/images/hero_1.jpg') }}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold"> {{ offre.getTitre() }} </h1>
+                    <div class="custom-breadcrumbs">
+
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="#">offre</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Detail</strong></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h2>{{ offre.getTitre() }}</h2>
+                            <div>
+                                <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{offre.getEntreprise.getNom()}}</span>
+                                <span class="m-2"><span class="icon-room mr-2"></span>{{offre.getEntreprise.getAdresse()}}</span>
+                                <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ offre.getType() }}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#
+                    href="{{ path("app_poste", {'id': offre.getId()}) }}"
+                    {% if app.user and is_granted('ROLE_ENTREPRISE') %}
+
+                    {% endif  %}
+                #}
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                    <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                </svg></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--=================================MODAL POSTULER=======================================-->
+                <!-- Modal add Demande -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Candidature</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" name="candidatureForm" action="{{ path('app_formation_add') }}" enctype="multipart/form-data">
+                                    <input type="hidden" name="candidature_token"
+                                           value="{{ csrf_token('candidature') }}"
+                                    >
+                                    <div class="form-group">
+                                        <label for="description">Lettre de motivation <strong>OU</strong></label>
+                                        <label for="file" class="btn btn-primary section-heading espacement">
+                                            Charger une lettre de motivation<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                            </svg>
+                                        </label>
+                                        <input type="file" id="file" name="motivationfile" style="display: none;" >
+                                        <textarea class="form-control" name="motivationtxt" id="motivationtxt" rows="5"></textarea>
+                                    </div>
+                                    {% if  app.user.getDemandeur.getCv()!=null %}
+                                    <label for="">Utiliser votre cv actuel: {{ app.user.getDemandeur.getCv() }} <strong>OU</strong></label>
+                                    {% endif %}
+                                    <label for="file" class="btn btn-primary section-heading espacement">
+                                        Charger un CV<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                            <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                        </svg>
+                                    </label>
+                                    <input type="file" id="file" name="cv" style="display: none;" >
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                        <input type="submit" value="Ajuter" class="btn btn-primary"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Description du poste</h3>
+                        <p>{{ offre.getDescription() }}</p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Education + Experience</h3>
+                        <ul class="list-unstyled m-0 p-0">
+                            <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Niveau d'étude minimum {{ offre.getNiveauEtude() }}</span></li>
+                            <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>Expérience minimum {{ offre.getNbrAnneeExperience() }}</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-light p-3 border rounded mb-4">
+                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Autre informations</h3>
+                        <ul class="list-unstyled pl-3 mb-0">
+                            <li class="mb-2"><strong class="text-black">Timing:</strong> {{ offre.getType() }}</li>
+                            <li class="mb-2"><strong class="text-black">Experience:</strong> {{ offre.getNbrAnneeExperience() }} an(s)</li>
+                            <li class="mb-2"><strong class="text-black">Localisation:</strong> {{ offre.getVille() }}</li>
+                            <li class="mb-2"><strong class="text-black">Sexe:</strong> Masculin & Feminin</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="site-section" id="next">
+        <div class="container">
+            <ul class="job-listings mb-5">
+                {% if offres!=null %}
+                    {% for offre in offres %}
+                        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                            <a href="{{ path("app_demandeur_offre", {'id':offre.getId()}) }}"></a>
+                            <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                    <h2>{{offre.getTitre()}}</h2>
+                                    <strong>{{offre.getEntreprise.getNom()}} | {{offre.getEntreprise.getAdresse()}}</strong>
+                                    <strong></strong>
+                                </div>
+                                <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                    <span class="icon-room"></span>{{offre.getVille()}}
+                                </div>
+                                <div class="job-listing-meta">
+                                    {% if offre.getType()=="Temps Plain" %}
+                                        <span class="badge badge-success">Temps Plain</span>
+                                    {% else %}
+                                        {% if offre.getType()=="Temps Partiel" %}
+                                            <span class="badge badge-warning">Temps Partiel</span>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+{% endblock %}

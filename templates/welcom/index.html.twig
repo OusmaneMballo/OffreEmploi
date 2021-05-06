@@ -108,7 +108,7 @@
                 {% if offres!=null %}
                     {% for offre in offres %}
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                            <a href="job-single.html"></a>
+                            <a href="{{ path("app_demandeur_offre", {'id':offre.getId()}) }}"></a>
                             <div class="job-listing-logo">
                                 {% if offre.getEntreprise.getLogo()==null %}
                                     <img src="{{ ('templates/images/nologo.png') }}" alt="Free Website Template by Free-Template.co" class="img-fluid">

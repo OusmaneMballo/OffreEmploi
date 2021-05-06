@@ -60,6 +60,15 @@ class OffreController extends AbstractController
         return $this->render('offre/offre.html.twig', ['offre' => $this->offreRepository->find($id), "entreprise"=>$this->getUser()->getEntreprise(), "offres"=>$offres, "size"=>$size]);
     }
 
+    /**
+     * @Route("/demandeur/offre/{id<[0-9]+>}", name="app_demandeur_offre")
+     * @param $id
+     * @return Response
+     */
+    public function demandeurViewOffre($id): Response
+    {
+        return $this->render('offre/demandeurViewOffre.html.twig', ['offre' => $this->offreRepository->find($id), "offres"=>$this->offreRepository->findAll()]);
+    }
 
     /**
      * @Route("/addoffre", name="app_offre_add", methods={"POST"})
@@ -139,5 +148,25 @@ class OffreController extends AbstractController
             return $this->redirectToRoute("app_offre");
         }
         return $this->redirectToRoute("app_one_offre", ['id'=>$id]);
+    }
+
+    /**
+     * @Route("/poster/{id<[0-9]+>}", name="app_poste")
+     * @param $id
+     * @return Response
+     */
+    public function poster($id):Response{
+        if($id!=null){
+            $offre=$this->offreRepository->find($id);
+            $user = $this->getUser();
+            if ($user!=null && $user->getRoles()[1]=="ROLE_DEMANDEUR"){
+                return $this->render('offre/edit.html.twig', ['offre' => $offre]);
+            }
+            else{
+                dd("Non connected!");
+            }
+            return $this->render('offre/edit.html.twig', ['offre' => $offre]);
+        }
+        return $this->redirectToRoute("app_offre");
     }
 }
