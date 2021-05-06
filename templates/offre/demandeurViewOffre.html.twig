@@ -61,31 +61,32 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" name="candidatureForm" action="{{ path('app_formation_add') }}" enctype="multipart/form-data">
+                                <form method="post" name="candidatureForm" action="{{ path('app_demande_add') }}" enctype="multipart/form-data">
                                     <input type="hidden" name="candidature_token"
                                            value="{{ csrf_token('candidature') }}"
                                     >
                                     <div class="form-group">
                                         <label for="description">Lettre de motivation <strong>OU</strong></label>
-                                        <label for="file" class="btn btn-primary section-heading espacement">
+                                        <label for="lettrefile" class="btn btn-primary section-heading espacement">
                                             Charger une lettre de motivation<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                                                 <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
                                                 <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                             </svg>
                                         </label>
-                                        <input type="file" id="file" name="motivationfile" style="display: none;" >
+                                        <input type="file" id="lettrefile" name="motivationfile" style="display: none;" >
                                         <textarea class="form-control" name="motivationtxt" id="motivationtxt" rows="5"></textarea>
                                     </div>
                                     {% if  app.user.getDemandeur.getCv()!=null %}
                                     <label for="">Utiliser votre cv actuel: {{ app.user.getDemandeur.getCv() }} <strong>OU</strong></label>
                                     {% endif %}
-                                    <label for="file" class="btn btn-primary section-heading espacement">
+                                    <label for="cvfile" class="btn btn-primary section-heading espacement">
                                         Charger un CV<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                                             <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
                                             <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
                                         </svg>
                                     </label>
-                                    <input type="file" id="file" name="cv" style="display: none;" >
+                                    <input type="file" id="cvfile" name="cv" style="display: none;" >
+                                    <input type="text" value="{{ offre.getId() }}" name="id_offre" hidden>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         <input type="submit" value="Ajuter" class="btn btn-primary"/>

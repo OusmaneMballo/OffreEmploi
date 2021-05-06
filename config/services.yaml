@@ -6,6 +6,7 @@
 parameters:
     cv_directory: './../public/cv/'
     photo_directory: './../public/photoprofile'
+    lettre_directory: './../public/lettre'
 
 services:
     # default configuration for services in *this* file
@@ -15,6 +16,7 @@ services:
         bind:
             $uploadDirCv: '%cv_directory%'
             $uploadPhotoProfil: '%photo_directory%'
+            $uploadLettre: '%lettre_directory%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

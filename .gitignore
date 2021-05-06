@@ -9,6 +9,7 @@
 /vendor/
 /public/cv/
 /public/photoprofile/
+/public/lettre/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
