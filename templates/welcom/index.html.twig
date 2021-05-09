@@ -111,9 +111,9 @@
                             <a href="{{ path("app_demandeur_offre", {'id':offre.getId()}) }}"></a>
                             <div class="job-listing-logo">
                                 {% if offre.getEntreprise.getLogo()==null %}
-                                    <img src="{{ ('templates/images/nologo.png') }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                                    <img src="{{ ('/templates/images/nologo.png') }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
                                     {% else %}
-                                        <img src="{{ ('photoprofile/') }}{{ offre.getEntreprise.getLogo() }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                                        <img src="{{ ('/photoprofile/') }}{{ offre.getEntreprise.getLogo() }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 {% endif %}
                             </div>
                             <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
