@@ -39,15 +39,29 @@
 
                     {% endif  %}
                 #}
-                <div class="col-lg-4">
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
-                                    <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
-                                </svg></button>
+                {% if app.user and is_granted('ROLE_DEMANDEUR') %}
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                        <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {% else %}
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#connexionModal" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                            <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
 
                 <!--=================================MODAL POSTULER=======================================-->
                 <!-- Modal add Demande -->
@@ -76,8 +90,10 @@
                                         <input type="file" id="lettrefile" name="motivationfile" style="display: none;" >
                                         <textarea class="form-control" name="motivationtxt" id="motivationtxt" rows="5"></textarea>
                                     </div>
-                                    {% if  app.user.getDemandeur.getCv()!=null %}
-                                    <label for="">Utiliser votre cv actuel: {{ app.user.getDemandeur.getCv() }} <strong>OU</strong></label>
+                                    {% if app.user and app.user.getDemandeur()!=null  %}
+                                        {% if  app.user.getDemandeur.getCv()!=null %}
+                                            <label for="">Utiliser votre cv actuel: {{ app.user.getDemandeur.getCv() }} <strong>OU</strong></label>
+                                        {% endif %}
                                     {% endif %}
                                     <label for="cvfile" class="btn btn-primary section-heading espacement">
                                         Charger un CV<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
@@ -90,6 +106,54 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                                         <input type="submit" value="Ajuter" class="btn btn-primary"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--=================================MODAL Connexion=======================================-->
+                <!-- Modal add Demande -->
+                <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Se Connecter</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ path('app_login') }}" class="p-4 border rounded">
+                                    {% if((error is defined) and error==true) %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+                                    {% if((app.user is defined) and app.user) %}
+                                        <div class="mb-3">
+                                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                        </div>
+                                    {% endif %}
+                                    <div class="row form-group">
+                                        <div class="col-md-12 mb-3 mb-md-0">
+                                            <label class="text-black" for="fname">Email</label>
+                                            <input type="email" id="fname" name="email" placeholder="Email address" class="form-control" required autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group mb-4">
+                                        <div class="col-md-12 mb-3 mb-md-0">
+                                            <label class="text-black" for="fname">Password</label>
+                                            <input type="password" name="password" id="fname" class="form-control" placeholder="Password" required>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id_offre" value="{{  offre.getId() }}">
+                                    <input type="hidden" name="_csrf_token"
+                                           value="{{ csrf_token('authenticate') }}"
+                                    >
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <input type="submit" value="Connexion" class="btn px-4 btn-primary text-white">
+                                        </div>
                                     </div>
                                 </form>
                             </div>

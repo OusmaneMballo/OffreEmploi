@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DemandeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DemandeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/demande/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/demande/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/offre/demandeurViewOffre.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/offre/demandeurViewOffre.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +217,9 @@
       <workItem from="1619831218362" duration="10812000" />
       <workItem from="1619871178147" duration="16524000" />
       <workItem from="1620172459896" duration="6863000" />
-      <workItem from="1620258286197" duration="10411000" />
+      <workItem from="1620258286197" duration="10967000" />
+      <workItem from="1620340758546" duration="6331000" />
+      <workItem from="1620510571920" duration="12309000" />
     </task>
     <servers />
   </component>
@@ -246,11 +248,11 @@
     </state>
     <state x="-1211" y="308" key="NewPhpClassDialog/0.0.1536.864/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1619886806893" />
     <state x="567" y="246" key="NewPhpClassDialog/0.0.1536.864@0.0.1536.864" timestamp="1618970749677" />
-    <state x="448" y="270" key="com.intellij.ide.util.TipDialog" timestamp="1620258304141">
+    <state x="515" y="203" key="com.intellij.ide.util.TipDialog" timestamp="1620510624614">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864/-1920.0.1920.1080@0.0.1536.864" timestamp="1619871178374" />
-    <state x="448" y="270" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1620258304141" />
+    <state x="515" y="203" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1620510624614" />
     <state x="425" y="197" key="run.anything.popup" timestamp="1618186976680">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
