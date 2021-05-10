@@ -9,6 +9,7 @@ use App\service\FileDeleteService;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -118,6 +119,42 @@ class DemandeController extends AbstractController
     public function demande($id): Response
     {
         $demande=$this->demandeRepository->find($id);
+        $demandeur=$demande->getDemandeur();
+        $offre=$demande->getOffre();
+        return $this->render('demande/index.html.twig', ['demande' => $demande, 'demandeur'=>$demandeur, 'offre'=>$offre]);
+    }
+
+    /**
+     * @Route("/demande/acceptation/{id<[0-9]+>}", name="app_demande_accepter")
+     * @param $id
+     * @return Response
+     */
+    public function acceptation($id): Response
+    {
+        $demande=$this->demandeRepository->find($id);
+        if ($demande!=null){
+            $demande->setReponse("Accepté");
+            $this->em->flush();
+            return new RedirectResponse('/offre/'.$demande->getOffre()->getId());
+        }
+        $demandeur=$demande->getDemandeur();
+        $offre=$demande->getOffre();
+        return $this->render('demande/index.html.twig', ['demande' => $demande, 'demandeur'=>$demandeur, 'offre'=>$offre]);
+    }
+
+    /**
+     * @Route("/demande/refus/{id<[0-9]+>}", name="app_demande_refuser")
+     * @param $id
+     * @return Response
+     */
+    public function refus($id): Response
+    {
+        $demande=$this->demandeRepository->find($id);
+        if ($demande!=null){
+            $demande->setReponse("Refus");
+            $this->em->flush();
+            return new RedirectResponse('/offre/'.$demande->getOffre()->getId());
+        }
         $demandeur=$demande->getDemandeur();
         $offre=$demande->getOffre();
         return $this->render('demande/index.html.twig', ['demande' => $demande, 'demandeur'=>$demandeur, 'offre'=>$offre]);

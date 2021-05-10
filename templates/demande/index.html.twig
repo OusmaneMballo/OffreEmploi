@@ -42,10 +42,10 @@
                 <div class="col-lg-4">
                     <div class="row">
                         <div class="col-6">
-                            <a href="{{ path("app_offre_delete", {'id': demande.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Refuser</a>
+                            <a href="{{ path("app_demande_refuser", {'id': demande.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Refuser</a>
                         </div>
                         <div class="col-6">
-                            <a href="{{ path("app_offre_edit", {'id': demande.getId()}) }}" class="btn btn-block btn-primary btn-md">Accepter</a>
+                            <a href="{{ path("app_demande_accepter", {'id': demande.getId()}) }}" class="btn btn-block btn-primary btn-md">Accepter</a>
                         </div>
                     </div>
                 </div>
@@ -92,10 +92,10 @@
 
                     <div class="row mb-5">
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Accepter</a>
+                            <a href="{{ path("app_demande_refuser", {'id': demande.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Refuser</a>
                         </div>
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-primary btn-md">Refuser</a>
+                            <a href="{{ path("app_demande_accepter", {'id': demande.getId()}) }}" class="btn btn-block btn-primary btn-md">Accepter</a>
                         </div>
                     </div>
 
