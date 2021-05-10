@@ -88,17 +88,17 @@
 
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">3 Canditat pour cette offre !</h2>
+                    <h2 class="section-title mb-2">{{ nbrCandidats }} Canditats pour cette offre !</h2>
                 </div>
             </div>
             <ul class="job-listings mb-5">
                 {% if offre.getDemandes()!=null %}
                     {% for demande in offre.getDemandes() %}
                         <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                            <a href="{{ path("app_demandeur_offre", {'id':demande.getId()}) }}"></a>
+                            <a href="{{ path("app_candidature", {'id':demande.getId()}) }}"></a>
                             <div class="job-listing-logo">
                                 {% if demande.getDemandeur.getPhoto()==null %}
-                                    <img src="{{ ('templates/images/nologo.png') }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                                    <img src="{{ ('/templates/images/nologo.png') }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 {% else %}
                                     <img src="{{ ('/photoprofile/') }}{{ demande.getDemandeur.getPhoto() }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
                                 {% endif %}

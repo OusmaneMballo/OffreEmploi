@@ -53,11 +53,18 @@ class OffreController extends AbstractController
     public function offre($id): Response
     {
         $offres=$this->offreRepository->findByEntreprise($this->getUser()->getEntreprise());
+        $offreDetail=$this->offreRepository->find($id);
+
         $size=0;
         foreach ($offres as $offre){
             $size++;
         }
-        return $this->render('offre/offre.html.twig', ['offre' => $this->offreRepository->find($id), "entreprise"=>$this->getUser()->getEntreprise(), "offres"=>$offres, "size"=>$size]);
+
+        $nbrCandidats=0;
+        foreach ($offreDetail->getDemandes() as $demande){
+            $nbrCandidats++;
+        }
+        return $this->render('offre/offre.html.twig', ['offre' => $offreDetail, "entreprise"=>$this->getUser()->getEntreprise(), "offres"=>$offres, "size"=>$size, 'nbrCandidats'=>$nbrCandidats]);
     }
 
     /**

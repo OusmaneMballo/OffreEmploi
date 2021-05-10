@@ -40,16 +40,29 @@
                     {% endif  %}
                 #}
                 {% if app.user and is_granted('ROLE_DEMANDEUR') %}
-                    <div class="col-lg-4">
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
-                                        <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
-                                    </svg>
-                                </button>
+                    {% if app.user.getDemandeur()==null %}
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#warningModal" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                            <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {% else %}
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-primary section-heading espacement" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">Postuler <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
+                                                <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endif %}
                     {% else %}
                         <div class="col-lg-4">
                             <div class="row">
@@ -156,6 +169,24 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--=================================MODAL Warning=======================================-->
+                <!-- Modal add Demande -->
+                <div class="modal fade" id="warningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Attention</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Oups!... merci de completer les informations de votre profile et revenez pour postuler!</h5>
                             </div>
                         </div>
                     </div>

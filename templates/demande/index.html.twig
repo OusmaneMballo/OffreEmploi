@@ -1,19 +1,118 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello DemandeController!{% endblock %}
-
+{% extends 'layout.html.twig' %}
+{% block title %}Emploi | Candidature{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!-- HOME -->
+    <section class="section-hero overlay inner-page bg-image" style="background-image:url('{{ ('/templates/images/hero_1.jpg') }}');" id="home-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1 class="text-white font-weight-bold"> {{ demandeur.getNomPrenom() }} </h1>
+                    <div class="custom-breadcrumbs">
 
-<div class="example-wrapper">
-    <h1>Hello Demande ✅</h1>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/MyProject/Emploi/emploi/src/Controller/DemandeController.php'|file_link(0) }}">src/Controller/DemandeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/MyProject/Emploi/emploi/templates/demande/index.html.twig'|file_link(0) }}">templates/demande/index.html.twig</a></code></li>
-    </ul>
-</div>
+                        <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                        <a href="#">Candidature</a> <span class="mx-2 slash">/</span>
+                        <span class="text-white"><strong>Detail</strong></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="site-section">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            {% if demandeur.getProfile()!=null %}
+                                <h2>{{ demandeur.getProfile.getLibelle() }}</h2>
+                            {% endif %}
+                            <div>
+                                <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>{{demandeur.getEmail()}}</span>
+                                <span class="m-2"><span class="icon-room mr-2"></span>{{demandeur.getAdresse()}}</span>
+                                <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ demandeur.getSexe() }}</span></span>
+                                    <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ demandeur.getAge() }} ans</span></span>
+                                    <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ demandeur.getNbrAnneeExperience() }} ans d'experience</span></span>
+                                    <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ demandeur.getDateNaissance() }} à</span></span>
+                                    <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">{{ demandeur.getLieuNaissance() }}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="{{ path("app_offre_delete", {'id': demande.getId()}) }}" class="btn btn-block btn-light btn-md text-danger">Refuser</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="{{ path("app_offre_edit", {'id': demande.getId()}) }}" class="btn btn-block btn-primary btn-md">Accepter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="mb-5">
+                        {% if demande.getTextMotivation()==null %}
+                            <div class="col-6">
+                                <a href="#" class="btn btn-block btn-primary btn-md">Voir Lettre de Motivation</a>
+                            </div>
+                            {% else %}
+                                <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-align-left mr-3"></span>Lettre de motivation</h3>
+                                <p>{{ demande.getTextMotivation() }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Experiences Proffessionnelles</h3>
+                        <ul class="list-unstyled m-0 p-0">
+                            {% if demandeur.getExperiences()!=null %}
+                                {% for experience in demandeur.getExperiences() %}
+                                    <li class="d-flex align-items-start mb-2">
+                                        <span class="icon-check_circle mr-2 text-muted"></span><span>{{ experience.getDateDebut()}}/{{ experience.getDateFin() }}: {{ experience.getPoste()}} chez {{ experience.getOrganisation()}}</span>
+                                        <p class="text-muted">{{ experience.getMission()}}</p>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-book mr-3"></span>Formations</h3>
+                        <ul class="list-unstyled m-0 p-0">
+                            {% if demandeur.getFormation()!=null %}
+                                {% for formation in demandeur.getFormation() %}
+                                    <li class="d-flex align-items-start mb-2">
+                                        <span class="icon-check_circle mr-2 text-muted"></span><span>{{ formation.getDateDebut()}}/{{ formation.getDateFin() }}: {{ formation.getIntitule()}} {{ formation.getEtablissement()}}</span>
+                                        <p class="text-muted">{{ formation.getDescription()}}</p>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="row mb-5">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-light btn-md text-danger">Accepter</a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="btn btn-block btn-primary btn-md">Refuser</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="bg-light p-3 border rounded mb-4">
+                        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Offre</h3>
+                        <ul class="list-unstyled pl-3 mb-0">
+                            <li class="mb-2"><strong class="text-black">Timing:</strong> {{ offre.getType() }}</li>
+                            <li class="mb-2"><strong class="text-black">Experience:</strong> {{ offre.getNbrAnneeExperience() }} an(s)</li>
+                            <li class="mb-2"><strong class="text-black">Localisation:</strong> {{ offre.getVille() }}</li>
+                            <li class="mb-2"><strong class="text-black">Sexe:</strong> Masculin & Feminin</li>
+                            <li class="mb-2"><strong class="text-black">Mission:</strong> {{ offre.getDescription() }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

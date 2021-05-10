@@ -43,6 +43,7 @@ class DemandeController extends AbstractController
      */
     public function addDemande(Request $request, string $uploadLettre, FileUploader $uploaderFile, string $uploadDirCv, FileDeleteService $fileDeleteService): Response
     {
+        $exceptionTaille=false;
         if ($request->isMethod("POST")){
             if ($this->isCsrfTokenValid('candidature', $request->request->get('candidature_token'))){
                 $demande=new Demande();
@@ -63,7 +64,9 @@ class DemandeController extends AbstractController
 
                         //On teste si le fichier est bien chargé
                         if(!$ok){
-                            //return $this->render('demandeur/index.html.twig', ["demandeur"=>$demandeur]);
+                            //Erreur
+                            $exceptionTaille=true;
+                            return $this->render('offre/demandeurViewOffre.html.twig', ['offre' => $this->offreRepository->find($request->request->get('id_offre')), "offres"=>$this->offreRepository->findAll(), 'exceptionTaille'=>$exceptionTaille]);
                         }
                         else{
                             $demande->setTextMotivation($lettrename);
@@ -86,6 +89,8 @@ class DemandeController extends AbstractController
                     //On teste si le fichier est bien chargé
                     if(!$ok){
                         //Erreur
+                        $exceptionTaille=true;
+                        return $this->render('offre/demandeurViewOffre.html.twig', ['offre' => $this->offreRepository->find($request->request->get('id_offre')), "offres"=>$this->offreRepository->findAll(), 'exceptionTaille'=>$exceptionTaille]);
                     }
                     else{
                         $demande->setCv($cvname);
@@ -105,5 +110,16 @@ class DemandeController extends AbstractController
         return $this->render('demande/index.html.twig');
     }
 
-
+    /**
+     * @Route("/demande/{id<[0-9]+>}", name="app_candidature")
+     * @param $id
+     * @return Response
+     */
+    public function demande($id): Response
+    {
+        $demande=$this->demandeRepository->find($id);
+        $demandeur=$demande->getDemandeur();
+        $offre=$demande->getOffre();
+        return $this->render('demande/index.html.twig', ['demande' => $demande, 'demandeur'=>$demandeur, 'offre'=>$offre]);
+    }
 }
